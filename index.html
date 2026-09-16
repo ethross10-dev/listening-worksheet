@@ -3,22 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Album Listening Worksheet</title>
+<title>Enjoying Media Routine</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
 <style>
-img{max-width:100%}
-[hidden]{display:none!important}
-
 :root{
   --bg:#EAEDEB; --surface:#FFFFFF; --surface-2:#F3F6F4; --surface-3:#E4EAE7;
   --ink:#141C1A; --ink-2:#3B4845; --muted:#6B7A76;
   --line:#CFD8D4; --line-2:#E1E7E4;
-  --accent:#1F5F52; --accent-ink:#FFFFFF; --accent-soft:#DBEBE5;
-  --manual:#7A5A2E; --manual-soft:#EFE6D6;
+  --io:#1F5F52;  --io-soft:#DBEBE5;
+  --pd:#8A5A1E;  --pd-soft:#F2E7D5;
+  --sc:#3F4A8A;  --sc-soft:#E0E3F2;
+  --accent:var(--io); --accent-soft:var(--io-soft); --accent-ink:#FFFFFF;
   --stamp:#9E3D2C;
-  --g-s:#1F6F4F; --g-b:#8A6A15; --g-c:#9A5A1C; --g-d:#96322A;
+  --g-hi:#1F6F4F; --g-mid:#8A6A15; --g-lo:#96322A;
   --shadow:0 1px 2px rgba(20,28,26,.06), 0 8px 22px -14px rgba(20,28,26,.35);
   --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
   --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
@@ -29,10 +28,12 @@ img{max-width:100%}
     --bg:#0E1513; --surface:#151E1C; --surface-2:#1B2523; --surface-3:#212D2A;
     --ink:#E7EEEB; --ink-2:#B4C2BE; --muted:#7E8F8A;
     --line:#2A3735; --line-2:#202B29;
-    --accent:#5CBCA3; --accent-ink:#08201B; --accent-soft:#1A302A;
-    --manual:#C7A16A; --manual-soft:#2C2519;
+    --io:#5CBCA3; --io-soft:#1A302A;
+    --pd:#D8A75C; --pd-soft:#2C2417;
+    --sc:#9AA6E8; --sc-soft:#1E2140;
+    --accent-ink:#08201B;
     --stamp:#E28D79;
-    --g-s:#5EC08E; --g-b:#D6B25C; --g-c:#E0965B; --g-d:#E58275;
+    --g-hi:#5EC08E; --g-mid:#D6B25C; --g-lo:#E58275;
     --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 26px -16px rgba(0,0,0,.8);
   }
 }
@@ -40,256 +41,93 @@ img{max-width:100%}
   --bg:#0E1513; --surface:#151E1C; --surface-2:#1B2523; --surface-3:#212D2A;
   --ink:#E7EEEB; --ink-2:#B4C2BE; --muted:#7E8F8A;
   --line:#2A3735; --line-2:#202B29;
-  --accent:#5CBCA3; --accent-ink:#08201B; --accent-soft:#1A302A;
-  --manual:#C7A16A; --manual-soft:#2C2519;
-  --stamp:#E28D79;
-  --g-s:#5EC08E; --g-b:#D6B25C; --g-c:#E0965B; --g-d:#E58275;
+  --io:#5CBCA3; --io-soft:#1A302A;
+  --pd:#D8A75C; --pd-soft:#2C2417;
+  --sc:#9AA6E8; --sc-soft:#1E2140;
+  --accent-ink:#08201B; --stamp:#E28D79;
+  --g-hi:#5EC08E; --g-mid:#D6B25C; --g-lo:#E58275;
   --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 26px -16px rgba(0,0,0,.8);
 }
+[data-tab="io"]{--accent:var(--io);--accent-soft:var(--io-soft)}
+[data-tab="pd"]{--accent:var(--pd);--accent-soft:var(--pd-soft)}
+[data-tab="sc"]{--accent:var(--sc);--accent-soft:var(--sc-soft)}
+
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
 button,input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+[hidden]{display:none!important}
+img{max-width:100%}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
-.wrap{max-width:1480px;margin:0 auto;padding:22px 24px 80px}
-.masthead{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;
-  padding-bottom:12px;border-bottom:2px solid var(--ink)}
-.brand h1{font-size:25px;font-weight:700;letter-spacing:-.02em;margin:0;line-height:1.1}
-.brand p{margin:5px 0 0;color:var(--muted);font-size:12.5px;max-width:60ch}
-.mast-right{display:flex;align-items:center;gap:8px}
+.wrap{max-width:1500px;margin:0 auto;padding:20px 24px 90px}
+.masthead{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;
+  padding-bottom:11px;border-bottom:2px solid var(--ink)}
+.brand h1{font-size:23px;font-weight:700;letter-spacing:-.02em;margin:0;line-height:1.1}
+.brand p{margin:4px 0 0;color:var(--muted);font-size:12.5px;max-width:62ch}
+.mast-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
   border:1px solid var(--line);border-radius:2px;padding:4px 7px;white-space:nowrap}
 .tag.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.tag.warn{color:var(--stamp);border-color:var(--stamp)}
 
-.grid{display:grid;grid-template-columns:392px minmax(0,1fr);gap:22px;margin-top:20px;align-items:start}
-@media (max-width:1040px){.grid{grid-template-columns:1fr}}
+.tabs{display:flex;gap:0;margin-top:16px;border-bottom:1px solid var(--line)}
+.tabs button{background:transparent;border:0;border-bottom:3px solid transparent;padding:10px 18px 9px;
+  cursor:pointer;display:flex;align-items:baseline;gap:8px;color:var(--muted);transition:.12s}
+.tabs button:hover{color:var(--ink-2)}
+.tabs button .tk{font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.06em}
+.tabs button .tn{font-size:13px}
+.tabs button .tc{font-family:var(--mono);font-size:10.5px;border:1px solid currentColor;border-radius:99px;padding:0 6px}
+.tabs button[aria-selected="true"]{color:var(--ink)}
+.tabs button[data-t="io"][aria-selected="true"]{border-bottom-color:var(--io)}
+.tabs button[data-t="io"][aria-selected="true"] .tk{color:var(--io)}
+.tabs button[data-t="pd"][aria-selected="true"]{border-bottom-color:var(--pd)}
+.tabs button[data-t="pd"][aria-selected="true"] .tk{color:var(--pd)}
+.tabs button[data-t="sc"][aria-selected="true"]{border-bottom-color:var(--sc)}
+.tabs button[data-t="sc"][aria-selected="true"] .tk{color:var(--sc)}
 
-.rail{position:sticky;top:16px;display:flex;flex-direction:column;gap:14px}
-@media (max-width:1040px){.rail{position:static}}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:4px;box-shadow:var(--shadow)}
-.panel-hd{display:flex;align-items:center;justify-content:space-between;gap:10px;
-  padding:9px 13px;border-bottom:1px solid var(--line-2);background:var(--surface-2);border-radius:4px 4px 0 0}
+.panel-hd{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 13px;
+  border-bottom:1px solid var(--line-2);background:var(--surface-2);border-radius:4px 4px 0 0}
 .panel-hd h2{margin:0;font-size:11px;font-family:var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:500}
 .panel-bd{padding:13px}
 
-.types{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:3px;overflow:hidden}
-.types button{background:var(--surface);border:0;border-right:1px solid var(--line-2);padding:9px 4px 8px;cursor:pointer;
-  display:flex;flex-direction:column;align-items:center;gap:3px;transition:background .12s}
-.types button:last-child{border-right:0}
-.types button:hover{background:var(--surface-2)}
-.types button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
-.types .t-l{font-size:13px;font-weight:600;letter-spacing:-.01em}
-.types .t-s{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;opacity:.72}
-
-label.fl{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:14px 0 5px}
-label.fl:first-child{margin-top:0}
-.inp,textarea.inp{width:100%;background:var(--surface-2);border:1px solid var(--line);border-radius:3px;padding:8px 10px;font-size:13.5px}
-textarea.inp{font-family:var(--serif);font-size:14.5px;line-height:1.55;resize:vertical;min-height:180px}
-.inp::placeholder,textarea.inp::placeholder{color:var(--muted);opacity:.75}
-.hint{font-size:11.5px;color:var(--muted);margin:5px 0 0;line-height:1.45}
-
-.opts{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;
-  padding:5px 11px;font-size:12px;background:var(--surface-2);cursor:pointer;user-select:none;transition:.12s}
-.chip:hover{border-color:var(--muted)}
-.chip input{position:absolute;opacity:0;pointer-events:none}
-.chip .dot{width:7px;height:7px;border-radius:50%;background:var(--line);flex:none;transition:.12s}
-.chip.on{background:var(--accent-soft);border-color:var(--accent);color:var(--ink)}
-.chip.on .dot{background:var(--accent)}
-
-.go{width:100%;margin-top:15px;background:var(--accent);color:var(--accent-ink);border:0;border-radius:3px;
-  padding:12px 14px;font-size:14px;font-weight:600;letter-spacing:-.01em;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:9px;transition:filter .12s}
-.go:hover:not(:disabled){filter:brightness(1.08)}
-.go:disabled{opacity:.55;cursor:not-allowed}
-.go .spin{width:13px;height:13px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;
-  animation:sp .7s linear infinite;flex:none}
-@keyframes sp{to{transform:rotate(360deg)}}
-.btn-row{display:flex;gap:8px;margin-top:8px}
-.btn{flex:1;background:var(--surface-2);border:1px solid var(--line);border-radius:3px;padding:8px 10px;
-  font-size:12.5px;cursor:pointer;transition:.12s}
+.btn{background:var(--surface-2);border:1px solid var(--line);border-radius:3px;padding:7px 12px;font-size:12.5px;cursor:pointer;transition:.12s}
 .btn:hover{background:var(--surface-3)}
 .btn:disabled{opacity:.45;cursor:not-allowed}
-
-.ladder{display:flex;flex-direction:column}
-.rung{display:grid;grid-template-columns:34px 62px minmax(0,1fr);gap:9px;align-items:baseline;
-  padding:5px 13px;border-bottom:1px solid var(--line-2);font-size:11.5px;color:var(--muted)}
-.rung:last-child{border-bottom:0}
-.rung b{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--ink-2)}
-.rung span.rng{font-family:var(--mono);font-size:11px;font-variant-numeric:tabular-nums}
-.rung.hit{background:var(--accent-soft);color:var(--ink-2)}
-.rung.hit b{color:var(--accent)}
-.rung.flag{border-top:1px solid var(--line)}
-
-/* ---------- output header ---------- */
-.outhd{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
-  background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:11px 14px;box-shadow:var(--shadow)}
-.outhd-l{min-width:0}
-.outhd-l .ttl{font-size:17px;font-weight:600;letter-spacing:-.015em;overflow-wrap:anywhere}
-.outhd-l .sub{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:2px}
-.outhd-r{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
-.copyall{background:var(--ink);color:var(--bg);border:0;border-radius:3px;padding:9px 14px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
-.copyall:hover{filter:brightness(1.25)}
-.copysub{background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line);border-radius:3px;
-  padding:9px 12px;font-size:12.5px;cursor:pointer;white-space:nowrap}
-.copysub:hover{background:var(--surface-3)}
-
-.scorebox{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:3px;padding:5px 6px 5px 10px;background:var(--surface-2)}
-.scorebox .lab{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.scorebox input{width:62px;background:transparent;border:0;border-bottom:1px solid var(--line);
-  font-family:var(--mono);font-size:19px;font-weight:600;font-variant-numeric:tabular-nums;text-align:center;padding:0 0 1px}
-.stamp{font-family:var(--mono);font-weight:600;font-size:15px;letter-spacing:.02em;border:1.5px solid currentColor;
-  border-radius:2px;padding:2px 8px;min-width:44px;text-align:center;color:var(--muted)}
-.stamp[data-g="S"],.stamp[data-g="A+"],.stamp[data-g="A"],.stamp[data-g="A-"],.stamp[data-g="P"]{color:var(--g-s)}
-.stamp[data-g="B+"],.stamp[data-g="B"],.stamp[data-g="B-"]{color:var(--g-b)}
-.stamp[data-g="C+"],.stamp[data-g="C"],.stamp[data-g="C-"]{color:var(--g-c)}
-.stamp[data-g="D+"],.stamp[data-g="D"],.stamp[data-g="NP"]{color:var(--g-d)}
-
-.status{margin-top:12px;border:1px solid var(--line);border-left:3px solid var(--accent);background:var(--surface);
-  border-radius:3px;padding:10px 13px;font-size:12.5px;color:var(--ink-2);display:flex;gap:10px;align-items:center;box-shadow:var(--shadow)}
-.status.err{border-left-color:var(--stamp);color:var(--stamp)}
-.status .keys{font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:auto;text-align:right}
-
-/* ---------- section rules ---------- */
-.srule{display:flex;align-items:center;gap:11px;margin:20px 0 10px}
-.srule .sl{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;white-space:nowrap}
-.srule .sd{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.srule .bar{flex:1;height:1px;background:var(--line);min-width:14px}
-.srule.res .sl{color:var(--manual)}
-.srule.ai  .sl{color:var(--accent)}
-
-/* ---------- short manual fields ---------- */
-.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));background:var(--surface);
-  border:1px solid var(--line);border-radius:4px;overflow:hidden;box-shadow:var(--shadow)}
-.field{padding:8px 11px 9px;display:flex;flex-direction:column;gap:3px;min-width:0;
-  box-shadow:1px 1px 0 var(--line-2)}
-.field .fh{display:flex;align-items:center;gap:7px}
-.field .fk{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--manual);background:var(--manual-soft);
-  border-radius:2px;padding:1px 5px;flex:none}
-.field .fn{font-size:11.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.field input{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line-2);padding:2px 0 3px;font-size:13.5px}
-.field input:focus{border-bottom-color:var(--accent)}
-.field input::placeholder{color:var(--muted);opacity:.6}
-
-/* ---------- cards ---------- */
-.cards{display:flex;flex-direction:column;gap:12px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:4px;box-shadow:var(--shadow);overflow:hidden}
-.card.pending{opacity:.5}
-.card-hd{display:flex;align-items:center;gap:10px;padding:7px 12px;border-bottom:1px solid var(--line-2);background:var(--surface-2)}
-.colref{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--accent-ink);background:var(--accent);
-  border-radius:2px;padding:2px 6px;letter-spacing:.03em;flex:none}
-.card.res .colref{color:var(--manual);background:var(--manual-soft)}
-.colname{font-size:13.5px;font-weight:600;letter-spacing:-.01em}
-.wc{font-family:var(--mono);font-size:10.5px;color:var(--muted);font-variant-numeric:tabular-nums;margin-left:auto;flex:none}
-.mini{background:transparent;border:1px solid var(--line);border-radius:2px;padding:3px 8px;font-size:11.5px;
-  color:var(--ink-2);cursor:pointer;flex:none;transition:.12s}
+.btn.prim{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
+.btn.prim:hover{filter:brightness(1.1)}
+.btn.dark{background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:600}
+.mini{background:transparent;border:1px solid var(--line);border-radius:2px;padding:3px 8px;font-size:11.5px;color:var(--ink-2);cursor:pointer}
 .mini:hover{background:var(--surface-3);border-color:var(--muted)}
 .mini.prim{border-color:var(--accent);color:var(--accent);font-weight:600}
 .mini.prim:hover{background:var(--accent-soft)}
 .mini:disabled{opacity:.4;cursor:not-allowed}
-.cell{width:100%;border:0;background:transparent;font-family:var(--serif);font-size:15px;line-height:1.6;
-  padding:12px 14px 14px;resize:vertical;min-height:60px;display:block;white-space:pre-wrap}
-.cell::placeholder{color:var(--muted);font-style:italic}
-.card.empty .cell{font-family:var(--sans);font-size:13px;color:var(--muted)}
+.spin{display:inline-block;width:11px;height:11px;border:2px solid currentColor;border-right-color:transparent;
+  border-radius:50%;animation:sp .7s linear infinite;vertical-align:-1px}
+@keyframes sp{to{transform:rotate(360deg)}}
 
-  font-family:var(--mono);font-size:12px;cursor:pointer}
+.fl{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 4px}
+.inp{width:100%;background:var(--surface-2);border:1px solid var(--line);border-radius:3px;padding:7px 9px;font-size:13.5px}
+.inp::placeholder{color:var(--muted);opacity:.7}
+textarea.inp{font-family:var(--serif);font-size:14.5px;line-height:1.55;resize:vertical}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:flex-end}
+.sp{flex:1}
+.hint{font-size:11.5px;color:var(--muted);line-height:1.45}
+.hint kbd{font-family:var(--mono);font-size:10.5px;border:1px solid var(--line);border-bottom-width:2px;border-radius:3px;padding:0 4px;background:var(--surface-2)}
 
-.example{border:1px dashed var(--line);background:var(--surface-2);border-radius:4px;padding:9px 13px;margin-top:12px;
-  font-size:12.5px;color:var(--muted);display:flex;gap:9px;align-items:baseline;flex-wrap:wrap}
-.example b{color:var(--ink-2);font-weight:600}
-
-.hist{display:flex;flex-direction:column;max-height:250px;overflow:auto}
-.hrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;
-  padding:8px 13px;border-bottom:1px solid var(--line-2);cursor:pointer;transition:background .12s}
-.hrow:hover{background:var(--surface-2)}
-.hrow:last-child{border-bottom:0}
-.hrow .ht{font-size:12.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.hrow .hm{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-top:1px}
-.hrow .hs{font-family:var(--mono);font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--ink-2)}
-.empty-note{padding:14px 13px;font-size:12.5px;color:var(--muted)}
-
-.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(14px);opacity:0;pointer-events:none;
-  background:var(--ink);color:var(--bg);padding:10px 17px;border-radius:3px;font-size:13px;font-weight:500;
-  transition:.18s ease;z-index:50;box-shadow:0 8px 26px -10px rgba(0,0,0,.5);max-width:min(560px,90vw);text-align:center}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-/* ================= page switcher ================= */
-.pagenav{display:flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;background:var(--surface)}
-.pagenav button{background:var(--surface);border:0;border-right:1px solid var(--line-2);padding:7px 15px;
-  font-size:12.5px;font-weight:600;cursor:pointer;color:var(--ink-2);white-space:nowrap;transition:.12s}
-.pagenav button:last-child{border-right:0}
-.pagenav button:hover{background:var(--surface-2)}
-.pagenav button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
-
-/* ================= listening worksheet ================= */
+/* ============ IO ============ */
 .wsbar{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;background:var(--surface);
-  border:1px solid var(--line);border-radius:4px;padding:11px 14px;box-shadow:var(--shadow);margin-top:20px}
+  border:1px solid var(--line);border-radius:4px;padding:11px 14px;box-shadow:var(--shadow);margin-top:16px}
 .wsf{display:flex;flex-direction:column;gap:3px;min-width:0}
 .wsf label{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.wsf input{background:transparent;border:0;border-bottom:1px solid var(--line);padding:2px 0 3px;font-size:15px;font-weight:600;min-width:180px}
+.wsf input{background:transparent;border:0;border-bottom:1px solid var(--line);padding:2px 0 3px;font-size:15px;font-weight:600;min-width:170px}
 .wsf input:focus{border-bottom-color:var(--accent)}
-.wsbar .sp{flex:1;min-width:8px}
-.wsbar .saved{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.saved{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
 
-.wsgrid{display:grid;grid-template-columns:318px minmax(0,1fr);gap:18px;margin-top:14px;align-items:start}
-@media (max-width:960px){.wsgrid{grid-template-columns:1fr}}
-.bank{position:sticky;top:16px}
-@media (max-width:960px){.bank{position:static}}
-.bank .panel-bd{padding:11px}
-.bank .srch{width:100%;background:var(--surface-2);border:1px solid var(--line);border-radius:3px;padding:6px 9px;font-size:13px;margin-bottom:9px}
-.banklist{display:flex;flex-wrap:wrap;gap:5px;min-height:52px;padding:7px;border:1px dashed var(--line);border-radius:3px;
-  background:var(--surface-2);max-height:340px;overflow:auto}
-.banklist.over{border-color:var(--accent);background:var(--accent-soft)}
-.banklist .none{font-size:12px;color:var(--muted);padding:6px 4px}
-.bankact{display:flex;gap:7px;margin-top:9px}
-.bankact button{flex:1}
-.wshint{font-size:11.5px;color:var(--muted);margin-top:9px;line-height:1.45}
-.wshint kbd{font-family:var(--mono);font-size:10.5px;border:1px solid var(--line);border-bottom-width:2px;
-  border-radius:3px;padding:0 4px;background:var(--surface-2)}
-
-.trk{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--line);
-  border-radius:3px;padding:4px 8px;font-size:12.5px;cursor:grab;user-select:none;max-width:100%;transition:.1s}
-.trk:hover{border-color:var(--muted);background:var(--surface-3)}
-.trk:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
-.trk.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 1px var(--accent)}
-.trk.drag{opacity:.4}
-.trk .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.trk .x{border:0;background:transparent;color:var(--muted);cursor:pointer;font-size:14px;line-height:1;padding:0 1px}
-.trk .x:hover{color:var(--stamp)}
-
-.buckets{display:flex;flex-direction:column;gap:8px}
-.bucket{display:grid;grid-template-columns:52px minmax(0,1fr);background:var(--surface);border:1px solid var(--line);
-  border-radius:4px;overflow:hidden;box-shadow:var(--shadow);transition:.12s}
-.bucket.over{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft),var(--shadow)}
-.bucket.blank{opacity:.72}
-.bnum{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:21px;font-weight:600;
-  font-variant-numeric:tabular-nums;color:var(--accent-ink);background:var(--accent);border:0}
-.bucket.blank .bnum{background:var(--surface-3);color:var(--muted);font-size:17px}
-.bucket.blank .bbody{padding:5px 11px 6px;gap:2px}
-.bucket.blank .bdrop{min-height:16px}
-.bucket.blank .bdrop .none{font-size:11px;padding:0}
-.bucket.blank .bnote{min-height:22px;font-size:13px}
-.bbody{padding:8px 11px 9px;min-width:0;display:flex;flex-direction:column;gap:7px}
-.bnote{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line-2);padding:2px 0 4px;
-  font-family:var(--serif);font-size:14px;line-height:1.5;resize:none;overflow:hidden;min-height:26px}
-.bnote:focus{border-bottom-color:var(--accent)}
-.bnote::placeholder{color:var(--muted);font-family:var(--sans);font-size:12.5px;font-style:italic}
-.bdrop{display:flex;flex-wrap:wrap;gap:5px;min-height:26px;align-items:flex-start}
-.bdrop .none{font-size:11.5px;color:var(--muted);font-style:italic;padding:3px 0}
-
-.bigpic{margin-top:16px}
-.bigpic textarea{width:100%;border:0;background:transparent;font-family:var(--serif);font-size:15px;
-  line-height:1.6;padding:12px 14px 14px;resize:vertical;min-height:130px;display:block}
-.bigpic textarea::placeholder{color:var(--muted);font-style:italic}
-.wsfoot{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:14px}
-.wsfoot .sp{flex:1}
-
-/* ---- search results (standalone build) ---- */
-.results{background:var(--surface);border:1px solid var(--line);border-radius:4px;box-shadow:var(--shadow);
-  margin-top:12px;overflow:hidden}
-.rhd{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);
-  padding:9px 14px;border-bottom:1px solid var(--line-2);background:var(--surface-2)}
+.results{background:var(--surface);border:1px solid var(--line);border-radius:4px;box-shadow:var(--shadow);margin-top:12px;overflow:hidden}
+.rhd{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);padding:9px 14px;border-bottom:1px solid var(--line-2);background:var(--surface-2)}
 .rmsg{padding:14px;font-size:13px;color:var(--muted)}
 .rrow{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1.2fr) auto;gap:12px;align-items:baseline;width:100%;
   text-align:left;background:var(--surface);border:0;border-bottom:1px solid var(--line-2);padding:9px 14px;cursor:pointer}
@@ -299,277 +137,344 @@ textarea.inp{font-family:var(--serif);font-size:14.5px;line-height:1.55;resize:v
 .rrow .ra{font-size:12.5px;color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .rrow .rm{font-family:var(--mono);font-size:10.5px;color:var(--muted);white-space:nowrap}
 @media (max-width:780px){.rrow{grid-template-columns:1fr}}
-.wsgrid{margin-top:14px}
+
+.wsgrid{display:grid;grid-template-columns:310px minmax(0,1fr);gap:18px;margin-top:14px;align-items:start}
+@media (max-width:980px){.wsgrid{grid-template-columns:1fr}}
+.stick{position:sticky;top:14px}
+@media (max-width:980px){.stick{position:static}}
+.srch{width:100%;background:var(--surface-2);border:1px solid var(--line);border-radius:3px;padding:6px 9px;font-size:13px;margin-bottom:9px}
+.banklist{display:flex;flex-wrap:wrap;gap:5px;min-height:52px;padding:7px;border:1px dashed var(--line);border-radius:3px;background:var(--surface-2);max-height:320px;overflow:auto}
+.banklist.over{border-color:var(--accent);background:var(--accent-soft)}
+.none{font-size:12px;color:var(--muted);padding:5px 3px;font-style:italic}
+.bankact{display:flex;gap:7px;margin-top:9px}
+.bankact .btn{flex:1}
+
+.trk{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--line);
+  border-radius:3px;padding:4px 8px;font-size:12.5px;cursor:grab;user-select:none;max-width:100%}
+.trk:hover{border-color:var(--muted);background:var(--surface-3)}
+.trk.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 1px var(--accent)}
+.trk.drag{opacity:.4}
+.trk .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.trk .x{border:0;background:transparent;color:var(--muted);cursor:pointer;font-size:14px;line-height:1;padding:0 1px}
+.trk .x:hover{color:var(--stamp)}
+
+.buckets{display:flex;flex-direction:column;gap:8px}
+.bucket{display:grid;grid-template-columns:50px minmax(0,1fr);background:var(--surface);border:1px solid var(--line);
+  border-radius:4px;overflow:hidden;box-shadow:var(--shadow)}
+.bucket.over{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft),var(--shadow)}
+.bucket.blank{opacity:.72}
+.bnum{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:20px;font-weight:600;
+  color:var(--accent-ink);background:var(--accent)}
+.bucket.blank .bnum{background:var(--surface-3);color:var(--muted);font-size:16px}
+.bucket.pdz .bnum{background:var(--pd);color:#fff}
+.bbody{padding:8px 11px 9px;min-width:0;display:flex;flex-direction:column;gap:6px}
+.bucket.blank .bbody{padding:5px 11px 6px;gap:2px}
+.bnote{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line-2);padding:2px 0 4px;
+  font-family:var(--serif);font-size:14px;line-height:1.5;resize:none;overflow:hidden;min-height:26px}
+.bucket.blank .bnote{min-height:22px;font-size:13px}
+.bnote:focus{border-bottom-color:var(--accent)}
+.bnote::placeholder{color:var(--muted);font-family:var(--sans);font-size:12.5px;font-style:italic}
+.bdrop{display:flex;flex-wrap:wrap;gap:5px;min-height:24px;align-items:flex-start}
+.bigpic textarea{width:100%;border:0;background:transparent;font-family:var(--serif);font-size:15px;line-height:1.6;
+  padding:12px 14px 14px;resize:vertical;min-height:120px;display:block}
+.wsfoot{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:14px}
+
+/* ============ PD ============ */
+.pdgrid{display:grid;grid-template-columns:320px minmax(0,1fr);gap:18px;margin-top:16px;align-items:start}
+@media (max-width:1040px){.pdgrid{grid-template-columns:1fr}}
+.queue{display:flex;flex-direction:column;max-height:420px;overflow:auto}
+.qrow{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:9px;align-items:center;padding:8px 12px;
+  border-bottom:1px solid var(--line-2);cursor:pointer}
+.qrow:last-child{border-bottom:0}
+.qrow:hover{background:var(--pd-soft)}
+.qrow .qs{font-family:var(--mono);font-size:14px;font-weight:600;color:var(--pd);text-align:center}
+.qrow .qt{font-size:12.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.qrow .qa{font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.qrow .qb{font-family:var(--mono);font-size:10px;color:var(--pd);border:1px solid var(--pd);border-radius:2px;padding:1px 5px}
+
+.elgrid{display:flex;flex-direction:column;gap:12px}
+.el{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--pd);border-radius:4px;box-shadow:var(--shadow);overflow:hidden}
+.el.done{border-left-color:var(--g-hi)}
+.el-hd{display:flex;align-items:center;gap:9px;padding:9px 13px;border-bottom:1px solid var(--line-2);background:var(--surface-2);flex-wrap:wrap}
+.el-hd .etype{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+  color:var(--pd);background:var(--pd-soft);border-radius:2px;padding:2px 7px;white-space:nowrap}
+.el-hd .esrc{font-size:13px;font-weight:600;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.el-hd .ets{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.el-bd{padding:11px 13px 13px;display:grid;gap:11px}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:9px}
+.fld{display:flex;flex-direction:column;gap:3px;min-width:0}
+.fld textarea,.fld input,.fld select{width:100%;background:var(--surface-2);border:1px solid var(--line-2);border-radius:3px;padding:6px 8px;font-size:13px}
+.fld textarea{font-family:var(--serif);font-size:14px;line-height:1.5;resize:vertical;min-height:54px}
+.repbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--surface-2);border:1px solid var(--line-2);
+  border-radius:3px;padding:8px 11px}
+.repbar .rl{font-size:12.5px;font-weight:600}
+.toggle{display:inline-flex;align-items:center;gap:7px;cursor:pointer;user-select:none;font-size:12.5px;
+  border:1px solid var(--line);border-radius:99px;padding:4px 11px;background:var(--surface)}
+.toggle input{position:absolute;opacity:0;pointer-events:none}
+.toggle .dot{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.toggle.on{border-color:var(--g-hi);color:var(--g-hi);background:var(--accent-soft);font-weight:600}
+.toggle.on .dot{background:var(--g-hi)}
+
+/* ============ SC ============ */
+.scgrid{display:grid;grid-template-columns:300px minmax(0,1fr);gap:18px;margin-top:16px;align-items:start}
+@media (max-width:1040px){.scgrid{grid-template-columns:1fr}}
+.wbfilter{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:9px}
+.wbfilter button{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;
+  border:1px solid var(--line);background:var(--surface-2);border-radius:99px;padding:3px 9px;cursor:pointer;color:var(--muted)}
+.wbfilter button[aria-pressed="true"]{background:var(--sc);color:#fff;border-color:var(--sc)}
+.wblist{display:flex;flex-direction:column;gap:6px;max-height:440px;overflow:auto;padding:2px}
+.wbel{border:1px solid var(--line);border-left:3px solid var(--pd);border-radius:3px;background:var(--surface);
+  padding:7px 9px;cursor:grab;user-select:none}
+.wbel:hover{border-color:var(--muted);background:var(--surface-2)}
+.wbel.sel{border-color:var(--sc);box-shadow:0 0 0 1px var(--sc)}
+.wbel.drag{opacity:.4}
+.wbel .wt{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--pd);font-weight:600}
+.wbel .wn{font-size:12.5px;font-weight:600;margin-top:1px}
+.wbel .ws{font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.projbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.sel-inp{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:7px 10px;font-size:13.5px;font-weight:600;min-width:170px}
+.songlist{display:flex;flex-direction:column}
+.songrow{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;align-items:center;padding:8px 12px;
+  border-bottom:1px solid var(--line-2);cursor:pointer}
+.songrow:last-child{border-bottom:0}
+.songrow:hover{background:var(--sc-soft)}
+.songrow[aria-current="true"]{background:var(--sc-soft);box-shadow:inset 3px 0 0 var(--sc)}
+.songrow .sn{font-size:13px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.songrow .sm{font-family:var(--mono);font-size:10px;color:var(--muted)}
+.songrow .sd{font-family:var(--mono);font-size:10px;color:var(--sc);border:1px solid var(--sc);border-radius:99px;padding:0 6px}
+.songrow.done .sn::before{content:"✓ ";color:var(--g-hi)}
+
+.songhd{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);
+  border-radius:4px;padding:11px 14px;box-shadow:var(--shadow);margin-bottom:12px}
+.sections{display:flex;flex-direction:column;gap:11px}
+.sect{background:var(--surface);border:1px solid var(--line);border-radius:4px;box-shadow:var(--shadow);overflow:hidden}
+.sect-hd{display:flex;align-items:center;gap:9px;padding:7px 12px;background:var(--surface-2);border-bottom:1px solid var(--line-2)}
+.sect-hd input{background:transparent;border:0;border-bottom:1px solid transparent;font-size:13.5px;font-weight:600;padding:2px 0;min-width:110px}
+.sect-hd input:focus{border-bottom-color:var(--sc)}
+.stems{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--line-2)}
+.stem{background:var(--surface);padding:8px 10px 10px;min-height:86px;display:flex;flex-direction:column;gap:6px}
+.stem.over{background:var(--sc-soft);box-shadow:inset 0 0 0 2px var(--sc)}
+.stem .sl{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.stem .slot{display:flex;flex-direction:column;gap:5px}
+.pill{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-left:3px solid var(--pd);
+  border-radius:3px;background:var(--surface-2);padding:5px 7px;font-size:11.5px}
+.pill .pt{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;color:var(--pd);font-weight:600}
+.pill .pn{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pill .px{margin-left:auto;border:0;background:transparent;color:var(--muted);cursor:pointer;font-size:13px;line-height:1;padding:0 2px}
+.pill .px:hover{color:var(--stamp)}
+.pill.done{border-left-color:var(--g-hi)}
+
+/* ============ modal / toast ============ */
+.modal{position:fixed;inset:0;background:rgba(10,16,15,.55);display:flex;align-items:flex-start;justify-content:center;
+  padding:40px 18px;z-index:60;overflow:auto}
+.sheet{background:var(--surface);border:1px solid var(--line);border-radius:5px;box-shadow:0 20px 60px -20px rgba(0,0,0,.6);
+  width:min(700px,100%);max-height:100%;display:flex;flex-direction:column}
+.sheet-hd{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line-2);background:var(--surface-2)}
+.sheet-hd h3{margin:0;font-size:15px;font-weight:600}
+.sheet-bd{padding:16px;display:grid;gap:13px;overflow:auto}
+.sheet-ft{display:flex;gap:9px;padding:12px 16px;border-top:1px solid var(--line-2);background:var(--surface-2);flex-wrap:wrap}
+.xbtn{margin-left:auto;border:0;background:transparent;font-size:20px;line-height:1;cursor:pointer;color:var(--muted)}
+.xbtn:hover{color:var(--ink)}
+pre.out{background:var(--surface-2);border:1px solid var(--line-2);border-radius:3px;padding:11px;font-family:var(--mono);
+  font-size:11.5px;line-height:1.55;white-space:pre-wrap;word-break:break-word;max-height:300px;overflow:auto;margin:0}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(14px);opacity:0;pointer-events:none;
+  background:var(--ink);color:var(--bg);padding:10px 17px;border-radius:3px;font-size:13px;font-weight:500;
+  transition:.18s ease;z-index:80;box-shadow:0 8px 26px -10px rgba(0,0,0,.5);max-width:min(600px,90vw);text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.empty{padding:34px 18px;text-align:center;color:var(--muted);font-size:13px;background:var(--surface);
+  border:1px dashed var(--line);border-radius:4px}
+.empty b{display:block;color:var(--ink-2);font-size:14px;margin-bottom:5px}
 </style>
 </head>
-<body>
+<body data-tab="io">
+
 <div class="wrap">
   <header class="masthead">
     <div class="brand">
-      <h1>Album Listening Worksheet</h1>
-      <p>Pull a real tracklist from MusicBrainz, score every track 1&ndash;10 while you listen, then copy the whole thing into your archive's Song Reviews cell.</p>
+      <h1>Enjoying Media Routine</h1>
+      <p>Listen closely, take the thing apart, build with the pieces. Everything you score an 8 or above becomes raw material.</p>
     </div>
     <div class="mast-right">
-      <span class="tag" id="tagMB">MusicBrainz &middot; ready</span>
-      <span class="tag on">Saves &middot; this browser</span>
+      <span class="tag" id="tagMB">MusicBrainz</span>
+      <span class="tag" id="tagAI">Claude · no key</span>
+      <button class="btn" id="btnSettings">Settings</button>
     </div>
   </header>
 
-  <div class="wsbar">
-    <div class="wsf"><label for="wsAlbum">Album</label><input id="wsAlbum" placeholder="AftërLyfe" autocomplete="off"></div>
-    <div class="wsf"><label for="wsArtist">Artist</label><input id="wsArtist" placeholder="Yeat" autocomplete="off"></div>
-    <button class="btn" id="wsSearch" style="flex:none;padding:8px 16px">Search MusicBrainz</button>
-    <span class="sp"></span>
-    <span class="saved" id="wsSaved">&mdash;</span>
-    <button class="btn" id="wsOpen" style="flex:none">Open saved</button>
-    <button class="btn" id="wsNew" style="flex:none">New sheet</button>
-  </div>
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-t="io" aria-selected="true"><span class="tk">IO</span><span class="tn">Inspiration from Others</span><span class="tc" id="cIO">0</span></button>
+    <button role="tab" data-t="pd" aria-selected="false"><span class="tk">PD</span><span class="tn">Personal Development</span><span class="tc" id="cPD">0</span></button>
+    <button role="tab" data-t="sc" aria-selected="false"><span class="tk">SC</span><span class="tn">Self Creation</span><span class="tc" id="cSC">0</span></button>
+  </nav>
 
-  <div class="results" id="wsResults" hidden></div>
+  <!-- ==================== IO ==================== -->
+  <section id="pageIO">
+    <div class="wsbar">
+      <div class="wsf"><label for="ioAlbum">Album</label><input id="ioAlbum" placeholder="AftërLyfe" autocomplete="off"></div>
+      <div class="wsf"><label for="ioArtist">Artist</label><input id="ioArtist" placeholder="Yeat" autocomplete="off"></div>
+      <button class="btn prim" id="ioSearch">Search MusicBrainz</button>
+      <span class="sp"></span>
+      <span class="saved" id="ioSaved">—</span>
+      <button class="btn" id="ioOpen">Open sheet</button>
+      <button class="btn" id="ioNew">New sheet</button>
+    </div>
 
-  <div class="wsgrid">
-    <aside class="panel bank">
-      <div class="panel-hd"><h2>Track bank</h2><span class="tag" id="wsCount">0 unplaced</span></div>
-      <div class="panel-bd">
-        <input class="srch" id="wsFilter" placeholder="Filter tracks" autocomplete="off">
-        <div class="banklist" id="wsBank"><div class="none">Search for the album above, or paste a tracklist.</div></div>
-        <div class="bankact">
-          <button class="btn" id="wsPasteBtn">Paste list</button>
-          <button class="btn" id="wsClearTracks">Clear all</button>
+    <div class="results" id="ioResults" hidden></div>
+
+    <div class="wsgrid">
+      <aside class="panel stick">
+        <div class="panel-hd"><h2>Track bank</h2><span class="tag" id="ioCount">0 unplaced</span></div>
+        <div class="panel-bd">
+          <input class="srch" id="ioFilter" placeholder="Filter tracks" autocomplete="off">
+          <div class="banklist" id="ioBank"><div class="none">Search the album above, or paste a tracklist.</div></div>
+          <div class="bankact">
+            <button class="btn" id="ioPasteBtn">Paste list</button>
+            <button class="btn" id="ioClear">Clear tracks</button>
+          </div>
+          <textarea class="inp" id="ioPaste" hidden style="min-height:110px;margin-top:9px;font-size:13px"
+            placeholder="One track per line. Numbering and durations get stripped."></textarea>
+          <div class="bankact" id="ioPasteRow" hidden>
+            <button class="btn" id="ioPasteAdd">Add</button>
+            <button class="btn" id="ioPasteCancel">Cancel</button>
+          </div>
+          <p class="hint" style="margin-top:9px">Drag a track onto a score, or click it then click the score.
+            With one selected press <kbd>1</kbd>–<kbd>9</kbd>, <kbd>0</kbd> for 10, <kbd>Esc</kbd> to deselect.
+            <b>8 and above flows to PD.</b></p>
         </div>
-        <textarea class="inp" id="wsPaste" hidden style="min-height:120px;margin-top:9px;font-size:13px"
-          placeholder="One track per line. Numbering, durations and dashes get stripped."></textarea>
-        <div class="bankact" id="wsPasteRow" hidden>
-          <button class="btn" id="wsPasteAdd">Add to bank</button>
-          <button class="btn" id="wsPasteCancel">Cancel</button>
+      </aside>
+
+      <div>
+        <div class="buckets" id="ioBuckets"></div>
+        <section class="panel bigpic" style="margin-top:14px">
+          <div class="panel-hd"><h2>Big picture</h2><span class="tag">Takeaways</span></div>
+          <textarea id="ioBig" spellcheck="false" placeholder="Where does this sit in their catalog? What's the throughline? What did the second listen change?"></textarea>
+        </section>
+        <div class="wsfoot">
+          <span class="hint" id="ioStat"></span>
+          <span class="sp"></span>
+          <button class="btn" id="ioCopy">Copy song reviews</button>
+          <button class="btn dark" id="ioToPD">Send 8+ to PD</button>
         </div>
-        <p class="wshint">Drag a track onto a score. Or click it, then click the score. With one selected,
-          press <kbd>1</kbd>&ndash;<kbd>9</kbd> or <kbd>0</kbd> for 10; <kbd>Esc</kbd> deselects.</p>
-      </div>
-    </aside>
-
-    <div>
-      <div class="buckets" id="wsBuckets"></div>
-
-      <section class="panel bigpic">
-        <div class="panel-hd"><h2>Big picture</h2><span class="tag">Takeaways</span></div>
-        <textarea id="wsBig" spellcheck="false"
-          placeholder="Where does this sit in their catalog? What's the throughline? What did the second listen change? Anything you want to make it into the verdict."></textarea>
-      </section>
-
-      <div class="wsfoot">
-        <span class="wshint" id="wsStat" style="margin:0"></span>
-        <span class="sp"></span>
-        <button class="btn" id="wsCopyBig" style="flex:none">Copy big picture</button>
-        <button class="copyall" id="wsCopy">Copy song reviews</button>
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- ==================== PD ==================== -->
+  <section id="pagePD" hidden>
+    <div class="pdgrid">
+      <aside class="panel stick">
+        <div class="panel-hd"><h2>Dissection queue</h2><span class="tag" id="pdQCount">0</span></div>
+        <div class="queue" id="pdQueue"></div>
+        <div class="panel-bd" style="border-top:1px solid var(--line-2)">
+          <button class="btn prim" id="pdAdd" style="width:100%">New element</button>
+          <p class="hint" style="margin-top:9px">Tracks you scored 8 or above in IO land here. Click one to start pulling it apart.
+            An element isn't finished until you've rebuilt it in Logic.</p>
+        </div>
+      </aside>
+
+      <div>
+        <div class="row" style="margin-bottom:12px">
+          <input class="inp" id="pdFilter" placeholder="Filter elements by track, type or text" style="max-width:340px">
+          <label class="toggle" id="pdOnlyOpen"><input type="checkbox"><span class="dot"></span>Only unreplicated</label>
+          <span class="sp"></span>
+          <span class="hint" id="pdStat"></span>
+        </div>
+        <div class="elgrid" id="pdList"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SC ==================== -->
+  <section id="pageSC" hidden>
+    <div class="scgrid">
+      <aside class="panel stick">
+        <div class="panel-hd"><h2>Word bank</h2><span class="tag" id="scWbCount">0</span></div>
+        <div class="panel-bd">
+          <input class="srch" id="scWbFilter" placeholder="Filter the bank" autocomplete="off">
+          <div class="wbfilter" id="scWbTypes"></div>
+          <div class="wblist" id="scWb"></div>
+          <p class="hint" style="margin-top:9px">Drag an element onto a stem, or click it then click the stem.</p>
+        </div>
+      </aside>
+
+      <div>
+        <div class="projbar">
+          <select class="sel-inp" id="scProject"></select>
+          <button class="btn" id="scNewProject">New project</button>
+          <button class="btn" id="scNewSong">New song</button>
+          <span class="sp"></span>
+          <button class="btn" id="scBrief">Critique brief</button>
+        </div>
+
+        <div class="panel" style="margin-bottom:12px">
+          <div class="panel-hd"><h2>Songs</h2><span class="tag" id="scSongCount">0</span></div>
+          <div class="songlist" id="scSongs"></div>
+        </div>
+
+        <div id="scSongPane"></div>
+      </div>
+    </div>
+  </section>
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div id="modalHost"></div>
 
 <script>
-/* ---------------- state ---------------- */
-let WS = null, WS_SEL = null, WS_T = null;
+/* ============================================================
+   Enjoying Media Routine — IO → PD → SC
+   ============================================================ */
 const $ = id => document.getElementById(id);
-const MB = "https://musicbrainz.org/ws/2";
+const uid = p => p + Math.random().toString(36).slice(2, 9);
+const esc = s => String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 
-function blank(){ return {id:"ws-"+Date.now(), album:"", artist:"", tracks:[], notes:{}, big:"", at:new Date().toISOString()}; }
-function save(k,v){ try{ localStorage.setItem("mbws:"+k, JSON.stringify(v)); }catch(_){} }
-function load(k,d){ try{ const s=localStorage.getItem("mbws:"+k); return s?JSON.parse(s):d; }catch(_){ return d; } }
+const EL_TYPES = ["Chord progression","Melody","Bassline","Kick pattern","Hi-hat pattern","Drum groove",
+  "Vocal flow","Vocal melody","Texture / sound design","Arrangement move","Mix / processing","Transition","Other"];
+const STEMS = [["drums","Drums"],["bass","Bass"],["melody","Melody"],["vocal","Vocal"],["fx","FX"]];
+const SHORT = {"Chord progression":"Chords","Melody":"Melody","Bassline":"Bass","Kick pattern":"Kick",
+  "Hi-hat pattern":"Hats","Drum groove":"Groove","Vocal flow":"Flow","Vocal melody":"Vox",
+  "Texture / sound design":"Texture","Arrangement move":"Arrange","Mix / processing":"Mix",
+  "Transition":"Transition","Other":"Other"};
+const DEFAULT_SECTIONS = ["Intro","Verse 1","Hook","Verse 2","Bridge","Outro"];
 
-let tt;
-function toast(m){ const t=$("toast"); t.textContent=m; t.classList.add("show"); clearTimeout(tt); tt=setTimeout(()=>t.classList.remove("show"),3200); }
+/* ---------------- storage ---------------- */
+const KEY = "emr:v1";
+let DB = null, TAB = "io", TOASTT = null;
 
-/* ---------------- MusicBrainz ---------------- */
-let lastCall = 0;
-async function mb(path){
-  const wait = Math.max(0, 1100 - (Date.now() - lastCall));   // their limit is 1 call/sec
-  if (wait) await new Promise(r => setTimeout(r, wait));
-  lastCall = Date.now();
-  const res = await fetch(MB + path, {headers:{Accept:"application/json"}});
-  if (!res.ok) throw new Error("MusicBrainz returned " + res.status);
-  return res.json();
+function blankDB(){
+  return {sheets:{}, elements:{}, projects:{}, cfg:{apiKey:"", model:"", ui:{sheet:null, project:null, song:null}}};
 }
-function mbFail(e){
-  $("tagMB").textContent = "MusicBrainz · unreachable";
-  $("tagMB").classList.remove("on");
-  const cors = String(e && e.message).toLowerCase().includes("failed to fetch");
-  toast(cors
-    ? "Couldn't reach MusicBrainz from this page. If you opened the file directly, try it over http (GitHub Pages) — or paste the tracklist."
-    : "MusicBrainz error: " + (e && e.message ? e.message : "unknown") + ". Paste the tracklist instead.");
-}
-
-async function searchReleases(){
-  const album = $("wsAlbum").value.trim(), artist = $("wsArtist").value.trim();
-  if (!album){ toast("Type the album name first."); $("wsAlbum").focus(); return; }
-  const btn = $("wsSearch"); btn.disabled = true; const old = btn.textContent; btn.textContent = "Searching…";
-  const box = $("wsResults"); box.hidden = false;
-  box.innerHTML = '<div class="rmsg">Searching MusicBrainz…</div>';
+function loadDB(){
+  try{ const raw = localStorage.getItem(KEY); if (raw) return JSON.parse(raw); }catch(_){}
+  const db = blankDB();
+  // migrate the old standalone listening worksheet
   try{
-    let q = 'release:"' + album.replace(/"/g,"") + '"';
-    if (artist) q += ' AND artist:"' + artist.replace(/"/g,"") + '"';
-    const data = await mb("/release/?query=" + encodeURIComponent(q) + "&fmt=json&limit=12");
-    const rel = (data.releases || []).filter(r => r["track-count"]);
-    $("tagMB").textContent = "MusicBrainz · connected";
-    $("tagMB").classList.add("on");
-    if (!rel.length){ box.innerHTML = '<div class="rmsg">Nothing matched. Try just the album name, or paste the tracklist.</div>'; return; }
-    box.innerHTML = '<div class="rhd">Pick the release you listened to</div>';
-    rel.forEach(r => {
-      const credit = (r["artist-credit"] || []).map(a => a.name || (a.artist && a.artist.name) || "").join(" ");
-      const media = (r.media || []).map(m => m.format).filter(Boolean).join(", ");
-      const row = document.createElement("button");
-      row.type = "button"; row.className = "rrow";
-      row.innerHTML = `<span class="rt"></span><span class="ra"></span>
-        <span class="rm">${r.date ? String(r.date).slice(0,4) : "—"} · ${r["track-count"]} tracks${media ? " · " + media : ""}${r.country ? " · " + r.country : ""}</span>`;
-      row.querySelector(".rt").textContent = r.title;
-      row.querySelector(".ra").textContent = credit;
-      row.onclick = () => loadRelease(r.id, r.title, credit);
-      box.appendChild(row);
-    });
-  }catch(e){ box.hidden = true; mbFail(e); }
-  finally{ btn.disabled = false; btn.textContent = old; }
+    const old = JSON.parse(localStorage.getItem("mbws:sheets") || "{}");
+    Object.values(old).forEach(s => { if (s && s.id) db.sheets[s.id] = s; });
+  }catch(_){}
+  return db;
+}
+let SAVET = null;
+function persist(quiet){
+  clearTimeout(SAVET);
+  if (!quiet) $("ioSaved").textContent = "saving…";
+  SAVET = setTimeout(() => {
+    try{ localStorage.setItem(KEY, JSON.stringify(DB)); }catch(e){ toast("Storage is full — export and prune old sheets."); }
+    $("ioSaved").textContent = "saved " + new Date().toLocaleTimeString(undefined,{hour:"numeric",minute:"2-digit"});
+    counts();
+  }, 500);
+}
+function toast(m){
+  const t = $("toast"); t.textContent = m; t.classList.add("show");
+  clearTimeout(TOASTT); TOASTT = setTimeout(() => t.classList.remove("show"), 3200);
 }
 
-async function loadRelease(mbid, title, credit){
-  const box = $("wsResults");
-  box.innerHTML = '<div class="rmsg">Loading tracklist…</div>';
-  try{
-    const data = await mb("/release/" + mbid + "?inc=recordings&fmt=json");
-    const names = [];
-    (data.media || []).forEach(m => (m.tracks || []).forEach(t => names.push(t.title)));
-    if (!names.length){ box.innerHTML = '<div class="rmsg">That release has no tracklist on MusicBrainz. Try another, or paste it.</div>'; return; }
-    if (title && !$("wsAlbum").value.trim()) $("wsAlbum").value = title;
-    if (credit && !$("wsArtist").value.trim()) $("wsArtist").value = credit;
-    const n = addTracks(names);
-    box.hidden = true;
-    render(); persist();
-    toast(`${n} track${n===1?"":"s"} loaded from MusicBrainz.`);
-  }catch(e){ box.hidden = true; mbFail(e); }
-}
-
-/* ---------------- tracks ---------------- */
-function addTracks(names){
-  const seen = new Set(WS.tracks.map(t => t.name.toLowerCase()));
-  let added = 0;
-  names.forEach(raw => {
-    const name = String(raw)
-      .replace(/^\s*\d+\s*[.)\-–:]\s*/, "")
-      .replace(/[\s\-–—\t]+\d{1,2}:\d{2}\s*$/, "")
-      .replace(/\s*[\(\[]\s*\d{1,2}:\d{2}\s*[\)\]]\s*$/, "")
-      .replace(/\s+/g," ").trim();
-    if (!name || seen.has(name.toLowerCase())) return;
-    seen.add(name.toLowerCase());
-    WS.tracks.push({id:"t"+Math.random().toString(36).slice(2,9), name, score:null});
-    added++;
-  });
-  return added;
-}
-function findT(id){ return WS.tracks.find(t => t.id === id); }
-function assign(id, score){ const t = findT(id); if (!t) return; t.score = score; WS_SEL = null; render(); persist(); }
-
-/* ---------------- render ---------------- */
-function render(){
-  if (!WS) WS = blank();
-  if ($("wsBig").value !== (WS.big || "")) $("wsBig").value = WS.big || "";
-
-  const q = $("wsFilter").value.trim().toLowerCase();
-  const bank = $("wsBank");
-  const unplaced = WS.tracks.filter(t => t.score == null);
-  const shown = q ? unplaced.filter(t => t.name.toLowerCase().includes(q)) : unplaced;
-  bank.innerHTML = "";
-  if (!shown.length){
-    const d = document.createElement("div"); d.className = "none";
-    d.textContent = WS.tracks.length ? (q ? "Nothing matches that filter." : "Every track is placed.")
-                                     : "Search for the album above, or paste a tracklist.";
-    bank.appendChild(d);
-  } else shown.forEach(t => bank.appendChild(chip(t, true)));
-  $("wsCount").textContent = `${unplaced.length} unplaced`;
-
-  const box = $("wsBuckets"); box.innerHTML = "";
-  for (let n = 10; n >= 1; n--){
-    const songs = WS.tracks.filter(t => t.score === n);
-    const note = WS.notes[n] || "";
-    const b = document.createElement("div");
-    b.className = "bucket" + (songs.length || note.trim() ? "" : " blank");
-    b.dataset.n = String(n);
-    b.innerHTML = `<div class="bnum">${n}</div><div class="bbody">
-        <textarea class="bnote" rows="1" spellcheck="false"></textarea><div class="bdrop"></div></div>`;
-    const ta = b.querySelector(".bnote");
-    ta.placeholder = `What a ${n} means on this record`;
-    ta.value = note;
-    const fit = () => { ta.style.height = "auto"; ta.style.height = (ta.scrollHeight + 2) + "px"; };
-    ta.addEventListener("input", () => {
-      WS.notes[n] = ta.value; fit();
-      b.classList.toggle("blank", !ta.value.trim() && !WS.tracks.some(t => t.score === n));
-      persist();
-    });
-    requestAnimationFrame(fit);
-
-    const drop = b.querySelector(".bdrop");
-    if (!songs.length){ const d = document.createElement("div"); d.className="none"; d.textContent="drop tracks here"; drop.appendChild(d); }
-    else songs.forEach(t => drop.appendChild(chip(t, false)));
-
-    b.addEventListener("dragover", e => { e.preventDefault(); b.classList.add("over"); });
-    b.addEventListener("dragleave", () => b.classList.remove("over"));
-    b.addEventListener("drop", e => {
-      e.preventDefault(); b.classList.remove("over");
-      const id = e.dataTransfer.getData("text/plain"); if (id) assign(id, n);
-    });
-    b.addEventListener("click", e => {
-      if (WS_SEL && !e.target.closest(".trk") && !e.target.closest(".bnote")) assign(WS_SEL, n);
-    });
-    box.appendChild(b);
-  }
-
-  const placed = WS.tracks.filter(t => t.score != null);
-  const avg = placed.length ? placed.reduce((a,t)=>a+t.score,0)/placed.length : 0;
-  $("wsStat").textContent = WS.tracks.length
-    ? `${placed.length} of ${WS.tracks.length} placed${placed.length ? ` · track average ${avg.toFixed(1)}` : ""}` : "";
-}
-
-function chip(t, inBank){
-  const c = document.createElement("div");
-  c.className = "trk" + (WS_SEL === t.id ? " sel" : "");
-  c.draggable = true; c.tabIndex = 0; c.dataset.id = t.id;
-  c.innerHTML = `<span class="nm"></span>` + (inBank ? "" : `<button class="x" title="Back to bank">&times;</button>`);
-  c.querySelector(".nm").textContent = t.name;
-  c.addEventListener("dragstart", e => { e.dataTransfer.setData("text/plain", t.id); c.classList.add("drag"); });
-  c.addEventListener("dragend", () => c.classList.remove("drag"));
-  c.addEventListener("click", e => {
-    if (e.target.closest(".x")){ assign(t.id, null); return; }
-    WS_SEL = (WS_SEL === t.id) ? null : t.id;
-    render();
-    const again = document.querySelector(`.trk[data-id="${t.id}"]`); if (again) again.focus();
-  });
-  c.addEventListener("keydown", e => {
-    if (e.key === "Enter" || e.key === " "){ e.preventDefault(); c.click(); return; }
-    if (/^[0-9]$/.test(e.key)){ e.preventDefault(); assign(t.id, e.key === "0" ? 10 : Number(e.key)); }
-    if (e.key === "Backspace" || e.key === "Delete"){ e.preventDefault(); assign(t.id, null); }
-  });
-  return c;
-}
-
-/* ---------------- output ---------------- */
-function songReviews(){
-  const out = [];
-  for (let n = 10; n >= 1; n--){
-    const songs = WS.tracks.filter(t => t.score === n);
-    const note = (WS.notes[n] || "").trim();
-    if (!songs.length && !note) continue;
-    out.push(note ? `${n} – ${note}` : `${n}`);
-    songs.forEach(t => out.push("•\t" + t.name));
-    out.push("");
-  }
-  return out.join("\n").trim();
-}
-const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+/* ---------------- clipboard (Excel-safe) ---------------- */
 const XL_TD = 'style="white-space:pre-wrap;mso-data-placement:same-cell;vertical-align:top"';
 const htmlCell = s => esc(s).replace(/\r\n|\n|\r/g,"&#10;").replace(/\t/g,"&#9;");
 const xlTable = vals => '<html xmlns:x="urn:schemas-microsoft-com:office:excel"><head><meta charset="utf-8"></head>' +
   '<body><table><tr>' + vals.map(v => `<td ${XL_TD}>${htmlCell(v)}</td>`).join("") + '</tr></table></body></html>';
-
 function copyRich(plain, html){
   const ta = document.createElement("textarea");
   ta.value = plain; ta.setAttribute("readonly","");
@@ -585,98 +490,900 @@ function copyRich(plain, html){
   try{ navigator.clipboard.writeText(plain); return true; }catch(_){ return false; }
 }
 
-/* ---------------- persistence ---------------- */
-function persist(){
-  if (!WS) return;
-  WS.album = $("wsAlbum").value.trim();
-  WS.artist = $("wsArtist").value.trim();
-  WS.big = $("wsBig").value;
-  WS.at = new Date().toISOString();
-  clearTimeout(WS_T);
-  $("wsSaved").textContent = "saving…";
-  WS_T = setTimeout(() => {
-    const all = load("sheets", {});
-    all[WS.id] = WS;
-    save("sheets", all);
-    $("wsSaved").textContent = "saved " + new Date().toLocaleTimeString(undefined,{hour:"numeric",minute:"2-digit"});
-  }, 600);
+/* ---------------- Anthropic ---------------- */
+const API = "https://api.anthropic.com/v1";
+function hasKey(){ return !!(DB.cfg.apiKey && DB.cfg.model); }
+async function ask(prompt, maxTokens){
+  if (!DB.cfg.apiKey) throw new Error("No API key saved. Open Settings.");
+  if (!DB.cfg.model)  throw new Error("No model chosen. Open Settings and load the model list.");
+  const res = await fetch(API + "/messages", {
+    method:"POST",
+    headers:{
+      "content-type":"application/json",
+      "x-api-key":DB.cfg.apiKey,
+      "anthropic-version":"2023-06-01",
+      "anthropic-dangerous-direct-browser-access":"true"
+    },
+    body: JSON.stringify({model:DB.cfg.model, max_tokens:maxTokens||1600, messages:[{role:"user",content:prompt}]})
+  });
+  if (!res.ok){
+    let msg = "HTTP " + res.status;
+    try{ const j = await res.json(); msg = (j.error && j.error.message) || msg; }catch(_){}
+    if (res.status === 401) msg = "That API key was rejected.";
+    if (res.status === 404) msg = "That model name isn't available on your account. Reload the model list in Settings.";
+    if (res.status === 429) msg = "Rate limited. Wait a moment and try again.";
+    throw new Error(msg);
+  }
+  const j = await res.json();
+  return (j.content || []).filter(b => b.type === "text").map(b => b.text).join("").trim();
+}
+async function askJSON(prompt, maxTokens){
+  const raw = await ask(prompt + "\n\nReply with ONLY a JSON object, no prose, no code fence.", maxTokens);
+  const cleaned = raw.replace(/^```(?:json)?\s*/i,"").replace(/\s*```$/,"");
+  const a = cleaned.indexOf("{"), b = cleaned.lastIndexOf("}");
+  if (a < 0 || b < 0) throw new Error("Claude didn't return JSON. Try again.");
+  return JSON.parse(cleaned.slice(a, b + 1));
+}
+function aiTag(){
+  const t = $("tagAI");
+  if (hasKey()){ t.textContent = "Claude · " + DB.cfg.model.replace(/^claude-/,""); t.className = "tag on"; }
+  else if (DB.cfg.apiKey){ t.textContent = "Claude · pick a model"; t.className = "tag warn"; }
+  else { t.textContent = "Claude · no key"; t.className = "tag"; }
 }
 
-/* ---------------- boot ---------------- */
-(function(){
-  WS = blank();
-  ["wsAlbum","wsArtist"].forEach(id => $(id).addEventListener("input", persist));
-  $("wsBig").addEventListener("input", persist);
-  $("wsFilter").addEventListener("input", render);
-  $("wsSearch").onclick = searchReleases;
-  ["wsAlbum","wsArtist"].forEach(id => $(id).addEventListener("keydown", e => { if (e.key === "Enter") searchReleases(); }));
+/* ---------------- modal ---------------- */
+function modal({title, body, footer, onOpen, wide}){
+  const host = $("modalHost");
+  host.innerHTML = `<div class="modal"><div class="sheet"${wide?' style="width:min(900px,100%)"':""}>
+    <div class="sheet-hd"><h3></h3><button class="xbtn" data-close>&times;</button></div>
+    <div class="sheet-bd"></div>
+    <div class="sheet-ft"></div></div></div>`;
+  host.querySelector("h3").textContent = title;
+  host.querySelector(".sheet-bd").innerHTML = body;
+  host.querySelector(".sheet-ft").innerHTML = footer || '<span class="sp"></span><button class="btn" data-close>Close</button>';
+  const close = () => { host.innerHTML = ""; };
+  host.querySelectorAll("[data-close]").forEach(b => b.onclick = close);
+  host.querySelector(".modal").addEventListener("mousedown", e => { if (e.target.classList.contains("modal")) close(); });
+  document.addEventListener("keydown", function esckey(e){
+    if (e.key === "Escape"){ close(); document.removeEventListener("keydown", esckey); }
+  });
+  if (onOpen) onOpen(host, close);
+  return close;
+}
 
-  $("wsBank").addEventListener("dragover", e => { e.preventDefault(); $("wsBank").classList.add("over"); });
-  $("wsBank").addEventListener("dragleave", () => $("wsBank").classList.remove("over"));
-  $("wsBank").addEventListener("drop", e => {
-    e.preventDefault(); $("wsBank").classList.remove("over");
-    const id = e.dataTransfer.getData("text/plain"); if (id) assign(id, null);
+/* ============================================================
+   IO
+   ============================================================ */
+let IO_SEL = null, MB_LAST = 0;
+function sheet(){
+  const id = DB.cfg.ui.sheet;
+  if (id && DB.sheets[id]) return DB.sheets[id];
+  const s = {id:uid("sh-"), album:"", artist:"", tracks:[], notes:{}, big:"", at:new Date().toISOString()};
+  DB.sheets[s.id] = s; DB.cfg.ui.sheet = s.id;
+  return s;
+}
+async function mb(path){
+  const wait = Math.max(0, 1100 - (Date.now() - MB_LAST));
+  if (wait) await new Promise(r => setTimeout(r, wait));
+  MB_LAST = Date.now();
+  const res = await fetch("https://musicbrainz.org/ws/2" + path, {headers:{Accept:"application/json"}});
+  if (!res.ok) throw new Error("MusicBrainz returned " + res.status);
+  return res.json();
+}
+function cleanTrack(raw){
+  return String(raw)
+    .replace(/^\s*\d+\s*[.)\-–:]\s*/, "")
+    .replace(/[\s\-–—\t]+\d{1,2}:\d{2}\s*$/, "")
+    .replace(/\s*[\(\[]\s*\d{1,2}:\d{2}\s*[\)\]]\s*$/, "")
+    .replace(/\s+/g," ").trim();
+}
+function ioAddTracks(names){
+  const s = sheet();
+  const seen = new Set(s.tracks.map(t => t.name.toLowerCase()));
+  let n = 0;
+  names.forEach(raw => {
+    const name = cleanTrack(raw);
+    if (!name || seen.has(name.toLowerCase())) return;
+    seen.add(name.toLowerCase());
+    s.tracks.push({id:uid("t-"), name, score:null});
+    n++;
+  });
+  return n;
+}
+async function ioSearch(){
+  const s = sheet();
+  s.album = $("ioAlbum").value.trim(); s.artist = $("ioArtist").value.trim();
+  if (!s.album){ toast("Type the album name first."); $("ioAlbum").focus(); return; }
+  const btn = $("ioSearch"); btn.disabled = true; const old = btn.textContent; btn.innerHTML = '<span class="spin"></span> Searching';
+  const box = $("ioResults"); box.hidden = false; box.innerHTML = '<div class="rmsg">Searching MusicBrainz…</div>';
+  try{
+    let q = 'release:"' + s.album.replace(/"/g,"") + '"';
+    if (s.artist) q += ' AND artist:"' + s.artist.replace(/"/g,"") + '"';
+    const data = await mb("/release/?query=" + encodeURIComponent(q) + "&fmt=json&limit=12");
+    const rel = (data.releases || []).filter(r => r["track-count"]);
+    $("tagMB").textContent = "MusicBrainz · connected"; $("tagMB").className = "tag on";
+    if (!rel.length){ box.innerHTML = '<div class="rmsg">Nothing matched. Try just the album name, or paste the tracklist.</div>'; return; }
+    box.innerHTML = '<div class="rhd">Pick the release you listened to</div>';
+    rel.forEach(r => {
+      const credit = (r["artist-credit"] || []).map(a => a.name || (a.artist && a.artist.name) || "").join(" ");
+      const media = (r.media || []).map(m => m.format).filter(Boolean).join(", ");
+      const row = document.createElement("button");
+      row.type = "button"; row.className = "rrow";
+      row.innerHTML = `<span class="rt"></span><span class="ra"></span><span class="rm">${r.date?String(r.date).slice(0,4):"—"} · ${r["track-count"]} tracks${media?" · "+media:""}${r.country?" · "+r.country:""}</span>`;
+      row.querySelector(".rt").textContent = r.title;
+      row.querySelector(".ra").textContent = credit;
+      row.onclick = () => ioLoadRelease(r.id, r.title, credit);
+      box.appendChild(row);
+    });
+  }catch(e){
+    box.hidden = true;
+    $("tagMB").textContent = "MusicBrainz · unreachable"; $("tagMB").className = "tag warn";
+    toast("Couldn't reach MusicBrainz. Paste the tracklist instead.");
+  }finally{ btn.disabled = false; btn.textContent = old; }
+}
+async function ioLoadRelease(mbid, title, credit){
+  const box = $("ioResults");
+  box.innerHTML = '<div class="rmsg">Loading tracklist…</div>';
+  try{
+    const data = await mb("/release/" + mbid + "?inc=recordings&fmt=json");
+    const names = [];
+    (data.media || []).forEach(m => (m.tracks || []).forEach(t => names.push(t.title)));
+    if (!names.length){ box.innerHTML = '<div class="rmsg">No tracklist on that release. Try another.</div>'; return; }
+    const s = sheet();
+    s.mbid = mbid;
+    if (title) { s.album = title; $("ioAlbum").value = title; }
+    if (credit){ s.artist = credit; $("ioArtist").value = credit; }
+    const n = ioAddTracks(names);
+    box.hidden = true;
+    ioRender(); persist();
+    toast(n + " tracks loaded from MusicBrainz.");
+  }catch(e){ box.hidden = true; toast("Couldn't load that tracklist."); }
+}
+function ioAssign(id, score){
+  const s = sheet();
+  const t = s.tracks.find(x => x.id === id);
+  if (!t) return;
+  t.score = score; IO_SEL = null;
+  ioRender(); persist();
+}
+function ioRender(){
+  const s = sheet();
+  if ($("ioAlbum").value !== s.album) $("ioAlbum").value = s.album || "";
+  if ($("ioArtist").value !== s.artist) $("ioArtist").value = s.artist || "";
+  if ($("ioBig").value !== (s.big || "")) $("ioBig").value = s.big || "";
+
+  const q = $("ioFilter").value.trim().toLowerCase();
+  const bank = $("ioBank");
+  const un = s.tracks.filter(t => t.score == null);
+  const shown = q ? un.filter(t => t.name.toLowerCase().includes(q)) : un;
+  bank.innerHTML = "";
+  if (!shown.length){
+    const d = document.createElement("div"); d.className = "none";
+    d.textContent = s.tracks.length ? (q ? "Nothing matches." : "Every track is placed.") : "Search the album above, or paste a tracklist.";
+    bank.appendChild(d);
+  } else shown.forEach(t => bank.appendChild(ioChip(t, true)));
+  $("ioCount").textContent = un.length + " unplaced";
+
+  const box = $("ioBuckets"); box.innerHTML = "";
+  for (let n = 10; n >= 1; n--){
+    const songs = s.tracks.filter(t => t.score === n);
+    const note = s.notes[n] || "";
+    const b = document.createElement("div");
+    b.className = "bucket" + (songs.length || note.trim() ? "" : " blank") + (n >= 8 ? " pdz" : "");
+    b.dataset.n = String(n);
+    b.innerHTML = `<div class="bnum">${n}</div><div class="bbody"><textarea class="bnote" rows="1" spellcheck="false"></textarea><div class="bdrop"></div></div>`;
+    const ta = b.querySelector(".bnote");
+    ta.placeholder = `What a ${n} means on this record`;
+    ta.value = note;
+    const fit = () => { ta.style.height = "auto"; ta.style.height = (ta.scrollHeight + 2) + "px"; };
+    ta.addEventListener("input", () => {
+      s.notes[n] = ta.value; fit();
+      b.classList.toggle("blank", !ta.value.trim() && !s.tracks.some(t => t.score === n));
+      persist();
+    });
+    requestAnimationFrame(fit);
+    const drop = b.querySelector(".bdrop");
+    if (!songs.length){ const d = document.createElement("div"); d.className = "none"; d.textContent = "drop tracks here"; drop.appendChild(d); }
+    else songs.forEach(t => drop.appendChild(ioChip(t, false)));
+    b.addEventListener("dragover", e => { e.preventDefault(); b.classList.add("over"); });
+    b.addEventListener("dragleave", () => b.classList.remove("over"));
+    b.addEventListener("drop", e => { e.preventDefault(); b.classList.remove("over");
+      const id = e.dataTransfer.getData("text/plain"); if (id) ioAssign(id, n); });
+    b.addEventListener("click", e => {
+      if (IO_SEL && !e.target.closest(".trk") && !e.target.closest(".bnote")) ioAssign(IO_SEL, n);
+    });
+    box.appendChild(b);
+  }
+  const placed = s.tracks.filter(t => t.score != null);
+  const hi = s.tracks.filter(t => t.score >= 8).length;
+  const avg = placed.length ? placed.reduce((a,t) => a + t.score, 0) / placed.length : 0;
+  $("ioStat").textContent = s.tracks.length
+    ? `${placed.length} of ${s.tracks.length} placed${placed.length ? ` · average ${avg.toFixed(1)}` : ""} · ${hi} at 8+`
+    : "";
+  counts();
+}
+function ioChip(t, inBank){
+  const c = document.createElement("div");
+  c.className = "trk" + (IO_SEL === t.id ? " sel" : "");
+  c.draggable = true; c.tabIndex = 0; c.dataset.id = t.id;
+  c.innerHTML = `<span class="nm"></span>` + (inBank ? "" : `<button class="x" title="Back to bank">&times;</button>`);
+  c.querySelector(".nm").textContent = t.name;
+  c.addEventListener("dragstart", e => { e.dataTransfer.setData("text/plain", t.id); c.classList.add("drag"); });
+  c.addEventListener("dragend", () => c.classList.remove("drag"));
+  c.addEventListener("click", e => {
+    if (e.target.closest(".x")){ ioAssign(t.id, null); return; }
+    IO_SEL = (IO_SEL === t.id) ? null : t.id;
+    ioRender();
+    const again = document.querySelector(`.trk[data-id="${t.id}"]`); if (again) again.focus();
+  });
+  c.addEventListener("keydown", e => {
+    if (e.key === "Enter" || e.key === " "){ e.preventDefault(); c.click(); return; }
+    if (/^[0-9]$/.test(e.key)){ e.preventDefault(); ioAssign(t.id, e.key === "0" ? 10 : Number(e.key)); }
+    if (e.key === "Backspace" || e.key === "Delete"){ e.preventDefault(); ioAssign(t.id, null); }
+  });
+  return c;
+}
+function ioSongReviews(){
+  const s = sheet(); const out = [];
+  for (let n = 10; n >= 1; n--){
+    const songs = s.tracks.filter(t => t.score === n);
+    const note = (s.notes[n] || "").trim();
+    if (!songs.length && !note) continue;
+    out.push(note ? `${n} – ${note}` : `${n}`);
+    songs.forEach(t => out.push("•\t" + t.name));
+    out.push("");
+  }
+  return out.join("\n").trim();
+}
+
+/* ============================================================
+   PD
+   ============================================================ */
+function pdCandidates(){
+  const out = [];
+  Object.values(DB.sheets).forEach(s => {
+    (s.tracks || []).forEach(t => {
+      if (t.score >= 8) out.push({sheetId:s.id, trackId:t.id, name:t.name, score:t.score, album:s.album, artist:s.artist});
+    });
+  });
+  const done = new Set(Object.values(DB.elements).map(e => e.trackId));
+  out.forEach(c => c.has = done.has(c.trackId));
+  return out.sort((a,b) => (a.has - b.has) || (b.score - a.score) || a.name.localeCompare(b.name));
+}
+function newElement(seed){
+  const e = Object.assign({
+    id: uid("el-"), trackId:"", track:"", album:"", artist:"", score:null,
+    type: EL_TYPES[0], timestamp:"", what:"",
+    key:"", bpm:"", chords:"", rhythm:"",
+    gear:"", technique:"",
+    steps:"", twist:"", replicated:false,
+    at:new Date().toISOString()
+  }, seed || {});
+  DB.elements[e.id] = e;
+  persist();
+  return e;
+}
+function pdRender(){
+  const q = $("pdFilter").value.trim().toLowerCase();
+  const onlyOpen = $("pdOnlyOpen").querySelector("input").checked;
+
+  const cands = pdCandidates();
+  const pend = cands.filter(c => !c.has);
+  $("pdQCount").textContent = pend.length + " waiting";
+  const qb = $("pdQueue"); qb.innerHTML = "";
+  if (!cands.length){
+    qb.innerHTML = '<div class="none" style="padding:14px">Nothing at 8+ yet. Score some tracks over on IO.</div>';
+  } else cands.forEach(c => {
+    const r = document.createElement("div");
+    r.className = "qrow";
+    r.innerHTML = `<div class="qs">${c.score}</div><div style="min-width:0"><div class="qt"></div><div class="qa"></div></div>
+      <div>${c.has ? '<span class="qb">done</span>' : '<span class="qb">new</span>'}</div>`;
+    r.querySelector(".qt").textContent = c.name;
+    r.querySelector(".qa").textContent = [c.artist, c.album].filter(Boolean).join(" · ");
+    r.onclick = () => {
+      const e = newElement({trackId:c.trackId, track:c.name, album:c.album, artist:c.artist, score:c.score});
+      pdRender();
+      setTimeout(() => { const n = document.querySelector(`.el[data-id="${e.id}"]`); if (n) n.scrollIntoView({behavior:"smooth",block:"center"}); }, 60);
+    };
+    qb.appendChild(r);
   });
 
-  $("wsPasteBtn").onclick = () => {
-    const on = $("wsPaste").hidden;
-    $("wsPaste").hidden = !on; $("wsPasteRow").hidden = !on;
-    if (on) $("wsPaste").focus();
+  let list = Object.values(DB.elements).sort((a,b) => String(b.at).localeCompare(String(a.at)));
+  if (onlyOpen) list = list.filter(e => !e.replicated);
+  if (q) list = list.filter(e => [e.track,e.artist,e.album,e.type,e.what,e.chords,e.technique,e.twist].join(" ").toLowerCase().includes(q));
+
+  const host = $("pdList"); host.innerHTML = "";
+  if (!list.length){
+    host.innerHTML = `<div class="empty"><b>No elements yet</b>Pick a track from the queue, or hit New element.
+      One element is one thing you want to steal — not a whole track.</div>`;
+  } else list.forEach(e => host.appendChild(pdCard(e)));
+
+  pdStat();
+  counts();
+}
+function pdStat(){
+  const all = Object.values(DB.elements);
+  $("pdStat").textContent = all.length
+    ? `${all.filter(e => e.replicated).length} of ${all.length} rebuilt in Logic` : "";
+}
+function pdCard(e){
+  const el = document.createElement("div");
+  el.className = "el" + (e.replicated ? " done" : "");
+  el.dataset.id = e.id;
+  el.innerHTML = `
+    <div class="el-hd">
+      <select class="etypeSel" style="border:0;background:var(--pd-soft);color:var(--pd);font-family:var(--mono);font-size:10px;
+        letter-spacing:.08em;text-transform:uppercase;font-weight:600;border-radius:2px;padding:3px 6px"></select>
+      <span class="esrc"></span>
+      <input class="ets" placeholder="0:00" style="background:transparent;border:0;border-bottom:1px solid var(--line-2);width:62px;text-align:center;font-family:var(--mono);font-size:11px">
+      <span class="sp" style="flex:1"></span>
+      <button class="mini" data-a="ai">Research</button>
+      <button class="mini" data-a="brief">Brief</button>
+      <button class="mini" data-a="del">Delete</button>
+    </div>
+    <div class="el-bd">
+      <div class="fld"><span class="fl">What it is — the thing you want to steal</span>
+        <textarea data-f="what" placeholder="The chord progression under the second half of the hook — that suspended thing that never resolves."></textarea></div>
+
+      <div class="fgrid">
+        <div class="fld"><span class="fl">Key</span><input data-f="key" placeholder="F# minor"></div>
+        <div class="fld"><span class="fl">BPM</span><input data-f="bpm" placeholder="142"></div>
+      </div>
+      <div class="fgrid">
+        <div class="fld"><span class="fl">Chords / notes</span><textarea data-f="chords" placeholder="F#m – D – A – E, but the D is played as Dmaj7#11"></textarea></div>
+        <div class="fld"><span class="fl">Rhythm / subdivision</span><textarea data-f="rhythm" placeholder="Hats in triplets, kick lands on the & of 3"></textarea></div>
+      </div>
+      <div class="fgrid">
+        <div class="fld"><span class="fl">Gear / plugins</span><textarea data-f="gear" placeholder="What made the sound"></textarea></div>
+        <div class="fld"><span class="fl">Technique / processing</span><textarea data-f="technique" placeholder="How it was played and treated"></textarea></div>
+      </div>
+
+      <div class="fld"><span class="fl">Rebuild it in Logic — steps</span>
+        <textarea data-f="steps" placeholder="1. Alchemy, warm pad preset. 2. Play the four chords as whole notes at 142…"></textarea></div>
+      <div class="fld"><span class="fl">My twist — what I'd change to make it mine</span>
+        <textarea data-f="twist" placeholder="Same movement but swap the last chord so it lands somewhere unexpected"></textarea></div>
+
+      <div class="repbar">
+        <span class="rl">Have you actually rebuilt this in Logic?</span>
+        <label class="toggle repToggle"><input type="checkbox"><span class="dot"></span><span class="tlab">Not yet</span></label>
+        <span class="sp" style="flex:1"></span>
+        <span class="hint">Describing builds knowledge. Rebuilding builds hands.</span>
+      </div>
+    </div>`;
+
+  const sel = el.querySelector(".etypeSel");
+  EL_TYPES.forEach(t => { const o = document.createElement("option"); o.value = t; o.textContent = t; sel.appendChild(o); });
+  sel.value = e.type;
+  sel.onchange = () => { e.type = sel.value; persist(true); scWordBank(); };
+
+  el.querySelector(".esrc").textContent = e.track ? `${e.track}${e.artist ? " — " + e.artist : ""}` : "Unlinked element";
+  const ts = el.querySelector(".ets"); ts.value = e.timestamp || "";
+  ts.oninput = () => { e.timestamp = ts.value; persist(true); };
+
+  el.querySelectorAll("[data-f]").forEach(f => {
+    f.value = e[f.dataset.f] || "";
+    const fit = () => { if (f.tagName === "TEXTAREA"){ f.style.height = "auto"; f.style.height = (f.scrollHeight + 2) + "px"; } };
+    requestAnimationFrame(fit);
+    f.addEventListener("input", () => { e[f.dataset.f] = f.value; fit(); persist(true); scWordBank(); });
+  });
+
+  const tog = el.querySelector(".repToggle"), cb = tog.querySelector("input"), lab = tog.querySelector(".tlab");
+  const paint = () => { tog.classList.toggle("on", e.replicated); lab.textContent = e.replicated ? "Rebuilt" : "Not yet"; el.classList.toggle("done", e.replicated); };
+  cb.checked = e.replicated; paint();
+  cb.onchange = () => { e.replicated = cb.checked; paint(); persist(true); scWordBank(); pdStat(); counts(); };
+
+  el.querySelector('[data-a="del"]').onclick = () => {
+    if (!confirm("Delete this element? It will also come out of any songs using it.")) return;
+    delete DB.elements[e.id];
+    Object.values(DB.projects).forEach(p => (p.songs||[]).forEach(sg => (sg.sections||[]).forEach(sec =>
+      STEMS.forEach(([k]) => { sec.stems[k] = (sec.stems[k]||[]).filter(x => x !== e.id); }))));
+    persist(); pdRender(); scRender();
   };
-  $("wsPasteCancel").onclick = () => { $("wsPaste").hidden = true; $("wsPasteRow").hidden = true; $("wsPaste").value = ""; };
-  $("wsPasteAdd").onclick = () => {
-    const lines = $("wsPaste").value.split(/\r?\n/).filter(l => l.trim());
-    if (!lines.length){ toast("Nothing to add."); return; }
-    const n = addTracks(lines);
-    $("wsPaste").value = ""; $("wsPaste").hidden = true; $("wsPasteRow").hidden = true;
-    render(); persist(); toast(`${n} track${n===1?"":"s"} added.`);
+  el.querySelector('[data-a="brief"]').onclick = () => pdBrief(e);
+  el.querySelector('[data-a="ai"]').onclick = ev => pdResearch(e, ev.currentTarget);
+  return el;
+}
+function pdPrompt(e){
+  return `I produce beats in Logic Pro. I am dissecting one specific element of a track so I can rebuild it myself and then twist it into my own music.
+
+Track: ${e.track || "(unnamed)"}${e.artist ? " by " + e.artist : ""}${e.album ? " (from " + e.album + ")" : ""}
+Element type: ${e.type}
+Where it happens: ${e.timestamp || "(not noted)"}
+What grabbed me: ${e.what || "(not written yet)"}
+
+Work out how this was made. Be concrete and technical, and say plainly when you are inferring rather than certain — a guess labelled as a guess is useful, a guess dressed as fact is not.
+
+Return these fields:
+- key: the musical key
+- bpm: tempo
+- chords: the actual chords or notes, written out
+- rhythm: the rhythmic pattern and subdivision
+- gear: instruments, synths or plugins likely used
+- technique: how it was played, arranged and processed
+- steps: a numbered, concrete recipe for rebuilding this in Logic Pro using stock instruments and plugins
+- twist: three specific ways I could bend this so it becomes mine rather than a copy`;
+}
+async function pdResearch(e, btn){
+  if (!hasKey()){ toast("Add your API key in Settings first, or use Brief to ask Claude in a chat."); return; }
+  if (!e.what && !e.track){ toast("Write what grabbed you first — Claude needs something to work from."); return; }
+  btn.disabled = true; const old = btn.textContent; btn.innerHTML = '<span class="spin"></span>';
+  try{
+    const j = await askJSON(pdPrompt(e) +
+      `\n\nShape: {"key":"","bpm":"","chords":"","rhythm":"","gear":"","technique":"","steps":"","twist":""}`, 2000);
+    ["key","bpm","chords","rhythm","gear","technique","steps","twist"].forEach(k => { if (j[k]) e[k] = String(j[k]); });
+    persist(); pdRender();
+    toast("Filled in. Check it against your own ears before you trust it.");
+  }catch(err){ toast(err.message || "Research failed."); }
+  finally{ btn.disabled = false; btn.textContent = old; }
+}
+function pdBrief(e){
+  const txt = pdPrompt(e);
+  modal({title:"Research brief", body:`<p class="hint">Paste this into a Claude chat — one with web search, which can read interviews and
+    breakdowns the in-page call can't.</p><pre class="out">${esc(txt)}</pre>`,
+    footer:`<button class="btn prim" data-copy>Copy brief</button><span class="sp"></span><button class="btn" data-close>Close</button>`,
+    onOpen:(host)=>{ host.querySelector("[data-copy]").onclick = () => toast(copyRich(txt) ? "Brief copied." : "Copy failed."); }});
+}
+
+/* ============================================================
+   SC
+   ============================================================ */
+let SC_SEL = null, SC_TYPE = "";
+function project(){
+  const id = DB.cfg.ui.project;
+  if (id && DB.projects[id]) return DB.projects[id];
+  const keys = Object.keys(DB.projects);
+  if (keys.length){ DB.cfg.ui.project = keys[0]; return DB.projects[keys[0]]; }
+  return null;
+}
+function song(){
+  const p = project(); if (!p) return null;
+  const s = (p.songs || []).find(x => x.id === DB.cfg.ui.song);
+  return s || (p.songs && p.songs[0]) || null;
+}
+function newProject(name){
+  const p = {id:uid("pr-"), name:name || "New project", songs:[], at:new Date().toISOString()};
+  DB.projects[p.id] = p; DB.cfg.ui.project = p.id; DB.cfg.ui.song = null;
+  persist(); return p;
+}
+function newSong(name){
+  const p = project() || newProject("Untitled project");
+  const s = {id:uid("sg-"), name:name || "New song", bpm:"", key:"", done:false, unsure:"",
+    sections: DEFAULT_SECTIONS.map(n => ({id:uid("se-"), name:n, note:"",
+      stems:{drums:[],bass:[],melody:[],vocal:[],fx:[]}}))};
+  p.songs.push(s); DB.cfg.ui.song = s.id;
+  persist(); return s;
+}
+function scWordBank(){
+  const host = $("scWb"); if (!host) return;
+  const q = ($("scWbFilter").value || "").trim().toLowerCase();
+  let list = Object.values(DB.elements).sort((a,b) => String(b.at).localeCompare(String(a.at)));
+  if (SC_TYPE) list = list.filter(e => e.type === SC_TYPE);
+  if (q) list = list.filter(e => [e.track,e.artist,e.type,e.what,e.chords].join(" ").toLowerCase().includes(q));
+  $("scWbCount").textContent = list.length + " element" + (list.length === 1 ? "" : "s");
+
+  const types = $("scWbTypes");
+  if (!types.dataset.built){
+    types.dataset.built = "1";
+    const mk = (label, val) => {
+      const b = document.createElement("button");
+      b.type = "button"; b.textContent = label; b.dataset.v = val;
+      b.setAttribute("aria-pressed", String(SC_TYPE === val));
+      b.onclick = () => { SC_TYPE = SC_TYPE === val ? "" : val;
+        types.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.v === SC_TYPE)));
+        scWordBank(); };
+      types.appendChild(b);
+    };
+    mk("All","");
+    EL_TYPES.forEach(t => mk(SHORT[t] || t, t));
+  }
+
+  host.innerHTML = "";
+  if (!list.length){ host.innerHTML = '<div class="none">Nothing in the bank yet. Dissect something on PD.</div>'; return; }
+  list.forEach(e => {
+    const d = document.createElement("div");
+    d.className = "wbel" + (SC_SEL === e.id ? " sel" : "");
+    d.draggable = true; d.tabIndex = 0; d.dataset.id = e.id;
+    if (e.replicated) d.style.borderLeftColor = "var(--g-hi)";
+    d.innerHTML = `<div class="wt"></div><div class="wn"></div><div class="ws"></div>`;
+    d.querySelector(".wt").textContent = e.type + (e.replicated ? " · rebuilt" : "");
+    d.querySelector(".wn").textContent = e.what ? e.what.slice(0, 70) : (e.track || "Untitled element");
+    d.querySelector(".ws").textContent = [e.track, e.artist].filter(Boolean).join(" — ");
+    d.addEventListener("dragstart", ev => { ev.dataTransfer.setData("text/plain", e.id); d.classList.add("drag"); });
+    d.addEventListener("dragend", () => d.classList.remove("drag"));
+    d.addEventListener("click", () => { SC_SEL = SC_SEL === e.id ? null : e.id; scWordBank(); });
+    host.appendChild(d);
+  });
+}
+function scRender(){
+  const psel = $("scProject");
+  const projs = Object.values(DB.projects);
+  psel.innerHTML = "";
+  if (!projs.length){
+    psel.innerHTML = '<option>No projects yet</option>';
+  } else projs.forEach(p => {
+    const o = document.createElement("option"); o.value = p.id; o.textContent = p.name;
+    if (project() && p.id === project().id) o.selected = true;
+    psel.appendChild(o);
+  });
+  psel.onchange = () => { DB.cfg.ui.project = psel.value; DB.cfg.ui.song = null; persist(true); scRender(); };
+
+  const p = project();
+  const list = $("scSongs"); list.innerHTML = "";
+  $("scSongCount").textContent = p ? (p.songs.length + " song" + (p.songs.length === 1 ? "" : "s")) : "0";
+  if (!p || !p.songs.length){
+    list.innerHTML = '<div class="none" style="padding:14px">No songs yet. Hit New song.</div>';
+  } else p.songs.forEach(sg => {
+    const used = (sg.sections || []).reduce((a,sec) => a + STEMS.reduce((b,[k]) => b + (sec.stems[k]||[]).length, 0), 0);
+    const r = document.createElement("div");
+    r.className = "songrow" + (sg.done ? " done" : "");
+    r.setAttribute("aria-current", String(song() && song().id === sg.id));
+    r.innerHTML = `<div><div class="sn"></div><div class="sm"></div></div><div class="sd">${used} el</div><div class="sm">${sg.sections.length} sec</div>`;
+    r.querySelector(".sn").textContent = sg.name;
+    r.querySelector(".sm").textContent = [sg.bpm && sg.bpm + " bpm", sg.key].filter(Boolean).join(" · ");
+    r.onclick = () => { DB.cfg.ui.song = sg.id; persist(true); scRender(); };
+    list.appendChild(r);
+  });
+
+  scSongPane();
+  scWordBank();
+  counts();
+}
+function scSongPane(){
+  const host = $("scSongPane"); host.innerHTML = "";
+  const sg = song();
+  if (!sg){
+    host.innerHTML = `<div class="empty"><b>No song selected</b>Make a project, add a song, then drag elements from the bank onto its stems.</div>`;
+    return;
+  }
+  const hd = document.createElement("div");
+  hd.className = "songhd";
+  hd.innerHTML = `
+    <div class="wsf"><label>Song</label><input id="sgName" style="min-width:210px"></div>
+    <div class="wsf"><label>BPM</label><input id="sgBpm" style="min-width:70px"></div>
+    <div class="wsf"><label>Key</label><input id="sgKey" style="min-width:100px"></div>
+    <span class="sp" style="flex:1"></span>
+    <label class="toggle" id="sgDone"><input type="checkbox"><span class="dot"></span><span class="tlab">In progress</span></label>
+    <button class="btn" id="sgAddSec">Add section</button>
+    <button class="btn" id="sgDel">Delete song</button>`;
+  host.appendChild(hd);
+  $("sgName").value = sg.name; $("sgBpm").value = sg.bpm || ""; $("sgKey").value = sg.key || "";
+  $("sgName").oninput = () => { sg.name = $("sgName").value; persist(true); };
+  $("sgName").onblur = scRender;
+  $("sgBpm").oninput = () => { sg.bpm = $("sgBpm").value; persist(true); };
+  $("sgKey").oninput = () => { sg.key = $("sgKey").value; persist(true); };
+  const dt = $("sgDone"), dcb = dt.querySelector("input"), dlab = dt.querySelector(".tlab");
+  const dpaint = () => { dt.classList.toggle("on", sg.done); dlab.textContent = sg.done ? "Happy with it" : "In progress"; };
+  dcb.checked = !!sg.done; dpaint();
+  dcb.onchange = () => { sg.done = dcb.checked; dpaint(); persist(true); scRender(); };
+  $("sgAddSec").onclick = () => {
+    sg.sections.push({id:uid("se-"), name:"New section", note:"", stems:{drums:[],bass:[],melody:[],vocal:[],fx:[]}});
+    persist(); scSongPane();
   };
-  $("wsClearTracks").onclick = () => {
-    if (!WS.tracks.length) return;
-    if (!confirm("Clear every track from this sheet? Your notes stay.")) return;
-    WS.tracks = []; WS_SEL = null; render(); persist();
+  $("sgDel").onclick = () => {
+    if (!confirm(`Delete "${sg.name}"?`)) return;
+    const p = project(); p.songs = p.songs.filter(x => x.id !== sg.id); DB.cfg.ui.song = null;
+    persist(); scRender();
   };
 
-  $("wsNew").onclick = () => {
-    WS = blank(); WS_SEL = null;
-    $("wsAlbum").value = ""; $("wsArtist").value = ""; $("wsBig").value = ""; $("wsFilter").value = "";
-    $("wsResults").hidden = true; $("wsSaved").textContent = "—";
-    render();
+  const wrap = document.createElement("div");
+  wrap.className = "sections";
+  sg.sections.forEach((sec, i) => wrap.appendChild(scSection(sg, sec, i)));
+  host.appendChild(wrap);
+
+  const unsure = document.createElement("section");
+  unsure.className = "panel";
+  unsure.style.marginTop = "12px";
+  unsure.innerHTML = `<div class="panel-hd"><h2>Where I'm unsure</h2><span class="tag">For the critique brief</span></div>
+    <textarea id="sgUnsure" style="width:100%;border:0;background:transparent;font-family:var(--serif);font-size:15px;
+      line-height:1.6;padding:12px 14px 14px;resize:vertical;min-height:90px;display:block"
+      placeholder="The bits you want Ethan Dietz to look at. Be specific — 'the transition into the hook feels abrupt and I don't know if it's the arrangement or the mix.'"></textarea>`;
+  host.appendChild(unsure);
+  $("sgUnsure").value = sg.unsure || "";
+  $("sgUnsure").oninput = () => { sg.unsure = $("sgUnsure").value; persist(true); };
+}
+function scSection(sg, sec, idx){
+  const d = document.createElement("div");
+  d.className = "sect";
+  d.innerHTML = `<div class="sect-hd">
+      <input class="secName">
+      <span class="sp" style="flex:1"></span>
+      <button class="mini" data-a="up">↑</button><button class="mini" data-a="down">↓</button>
+      <button class="mini" data-a="del">Remove</button>
+    </div>
+    <div class="stems"></div>`;
+  const nm = d.querySelector(".secName"); nm.value = sec.name;
+  nm.oninput = () => { sec.name = nm.value; persist(true); };
+  d.querySelector('[data-a="up"]').onclick = () => { if (idx > 0){ sg.sections.splice(idx-1,0,sg.sections.splice(idx,1)[0]); persist(); scSongPane(); } };
+  d.querySelector('[data-a="down"]').onclick = () => { if (idx < sg.sections.length-1){ sg.sections.splice(idx+1,0,sg.sections.splice(idx,1)[0]); persist(); scSongPane(); } };
+  d.querySelector('[data-a="del"]').onclick = () => { sg.sections = sg.sections.filter(x => x.id !== sec.id); persist(); scSongPane(); };
+
+  const stems = d.querySelector(".stems");
+  STEMS.forEach(([k, label]) => {
+    const st = document.createElement("div");
+    st.className = "stem";
+    st.innerHTML = `<div class="sl">${label}</div><div class="slot"></div>`;
+    const slot = st.querySelector(".slot");
+    const ids = sec.stems[k] || (sec.stems[k] = []);
+    if (!ids.length){ const n = document.createElement("div"); n.className = "none"; n.textContent = "—"; slot.appendChild(n); }
+    ids.forEach(id => {
+      const e = DB.elements[id];
+      if (!e) return;
+      const p = document.createElement("div");
+      p.className = "pill" + (e.replicated ? " done" : "");
+      p.innerHTML = `<span class="pt"></span><span class="pn"></span><button class="px" title="Remove">&times;</button>`;
+      p.querySelector(".pt").textContent = SHORT[e.type] || e.type;
+      p.querySelector(".pn").textContent = e.what ? e.what.slice(0,42) : (e.track || "element");
+      p.title = `${e.type} — ${e.track || "unlinked"}${e.artist ? " by " + e.artist : ""}\n${e.what || ""}`;
+      p.querySelector(".px").onclick = ev => { ev.stopPropagation();
+        sec.stems[k] = sec.stems[k].filter(x => x !== id); persist(); scSongPane(); };
+      slot.appendChild(p);
+    });
+    const place = id => {
+      if (!id || !DB.elements[id]) return;
+      if (!sec.stems[k].includes(id)) sec.stems[k].push(id);
+      SC_SEL = null; persist(); scSongPane(); scWordBank();
+    };
+    st.addEventListener("dragover", ev => { ev.preventDefault(); st.classList.add("over"); });
+    st.addEventListener("dragleave", () => st.classList.remove("over"));
+    st.addEventListener("drop", ev => { ev.preventDefault(); st.classList.remove("over"); place(ev.dataTransfer.getData("text/plain")); });
+    st.addEventListener("click", ev => { if (SC_SEL && !ev.target.closest(".pill")) place(SC_SEL); });
+    stems.appendChild(st);
+  });
+  return d;
+}
+function scBriefText(){
+  const p = project(), sg = song();
+  if (!sg) return "";
+  const L = [];
+  L.push(`# ${sg.name}${p ? "  ·  " + p.name : ""}`);
+  L.push([sg.bpm && sg.bpm + " bpm", sg.key].filter(Boolean).join("  ·  "));
+  L.push("");
+  L.push("## What I'm referencing, section by section");
+  sg.sections.forEach(sec => {
+    const rows = [];
+    STEMS.forEach(([k, label]) => {
+      (sec.stems[k] || []).forEach(id => {
+        const e = DB.elements[id];
+        if (!e) return;
+        const src = e.track ? `*${e.track}*${e.artist ? " by " + e.artist : ""}${e.timestamp ? " (" + e.timestamp + ")" : ""}` : "my own idea, not lifted from anything";
+        rows.push(`- **${label} stem** — ${e.type}, from ${src}`
+          + (e.what ? `\n  - what grabbed me: ${e.what}` : "")
+          + (e.twist ? `\n  - my twist: ${e.twist}` : "")
+          + (e.replicated ? "" : `\n  - ⚠ not rebuilt in Logic yet`));
+      });
+    });
+    if (!rows.length) return;
+    L.push(`\n### ${sec.name}`);
+    L.push(rows.join("\n"));
+  });
+  const all = sg.sections.flatMap(sec => STEMS.flatMap(([k]) => (sec.stems[k]||[])));
+  const notBuilt = all.map(id => DB.elements[id]).filter(e => e && !e.replicated).length;
+  L.push("");
+  L.push("## Where I'm unsure");
+  L.push(sg.unsure ? sg.unsure : "_(nothing written yet)_");
+  L.push("");
+  L.push(`_${all.length} referenced elements across ${sg.sections.length} sections` +
+    (notBuilt ? `, ${notBuilt} of them not yet rebuilt in Logic._` : `, all rebuilt in Logic._`));
+  return L.join("\n");
+}
+
+/* ============================================================
+   settings / shell
+   ============================================================ */
+function openSettings(){
+  modal({
+    title:"Settings",
+    wide:false,
+    body:`
+      <div class="fld"><span class="fl">Anthropic API key</span>
+        <input class="inp" id="setKey" type="password" placeholder="sk-ant-..." autocomplete="off"></div>
+      <p class="hint">Stored in this browser only, and sent straight to Anthropic from this page. Because the site is public,
+        anyone with access to this browser profile can read it — use a key you're willing to rotate, and keep a spend limit on it.</p>
+      <div class="row">
+        <div class="fld" style="flex:1"><span class="fl">Model</span>
+          <select class="inp" id="setModel"><option value="">— load the list —</option></select></div>
+        <button class="btn" id="setLoad">Load models</button>
+      </div>
+      <p class="hint">The list comes from your own account, so you always get a model that actually exists for you.</p>
+      <hr style="border:0;border-top:1px solid var(--line-2);margin:2px 0">
+      <div class="row">
+        <button class="btn" id="setExport">Export backup</button>
+        <button class="btn" id="setImport">Import backup</button>
+        <span class="sp" style="flex:1"></span>
+        <span class="hint" id="setStat"></span>
+      </div>`,
+    footer:`<button class="btn prim" id="setSave">Save</button><span class="sp" style="flex:1"></span><button class="btn" data-close>Close</button>`,
+    onOpen:(host, close) => {
+      const k = host.querySelector("#setKey"), m = host.querySelector("#setModel");
+      k.value = DB.cfg.apiKey || "";
+      if (DB.cfg.model){ m.innerHTML = `<option value="${esc(DB.cfg.model)}" selected>${esc(DB.cfg.model)}</option>`; }
+      const n = Object.keys(DB.elements).length, s = Object.keys(DB.sheets).length, p = Object.keys(DB.projects).length;
+      host.querySelector("#setStat").textContent = `${s} sheets · ${n} elements · ${p} projects`;
+
+      host.querySelector("#setLoad").onclick = async e => {
+        const key = k.value.trim();
+        if (!key){ toast("Paste your API key first."); return; }
+        const btn = e.currentTarget; btn.disabled = true; btn.innerHTML = '<span class="spin"></span>';
+        try{
+          const res = await fetch(API + "/models?limit=100", {headers:{
+            "x-api-key":key, "anthropic-version":"2023-06-01", "anthropic-dangerous-direct-browser-access":"true"}});
+          if (!res.ok) throw new Error(res.status === 401 ? "That key was rejected." : "HTTP " + res.status);
+          const j = await res.json();
+          const ids = (j.data || []).map(x => x.id);
+          if (!ids.length) throw new Error("No models came back.");
+          m.innerHTML = ids.map(id => `<option value="${esc(id)}"${id === DB.cfg.model ? " selected" : ""}>${esc(id)}</option>`).join("");
+          if (!DB.cfg.model) m.value = ids[0];
+          toast(ids.length + " models loaded.");
+        }catch(err){ toast(err.message || "Couldn't load models."); }
+        finally{ btn.disabled = false; btn.textContent = "Load models"; }
+      };
+      host.querySelector("#setSave").onclick = () => {
+        DB.cfg.apiKey = k.value.trim(); DB.cfg.model = m.value || "";
+        persist(); aiTag(); close();
+        toast(hasKey() ? "Saved. Research is live on PD." : "Saved.");
+      };
+      host.querySelector("#setExport").onclick = () => {
+        const blob = new Blob([JSON.stringify(DB, null, 1)], {type:"application/json"});
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "emr-backup-" + new Date().toISOString().slice(0,10) + ".json";
+        a.click(); URL.revokeObjectURL(a.href);
+      };
+      host.querySelector("#setImport").onclick = () => {
+        const f = document.createElement("input"); f.type = "file"; f.accept = "application/json";
+        f.onchange = () => {
+          const file = f.files[0]; if (!file) return;
+          const r = new FileReader();
+          r.onload = () => {
+            try{
+              const j = JSON.parse(r.result);
+              if (!j.sheets || !j.elements) throw new Error("bad");
+              if (!confirm("Replace everything currently in this browser with the backup?")) return;
+              DB = j; DB.cfg = DB.cfg || {}; persist(); close(); renderAll();
+              toast("Backup restored.");
+            }catch(_){ toast("That file isn't an EMR backup."); }
+          };
+          r.readAsText(file);
+        };
+        f.click();
+      };
+    }
+  });
+}
+
+function counts(){
+  const hi = Object.values(DB.sheets).reduce((a,s) => a + (s.tracks||[]).filter(t => t.score >= 8).length, 0);
+  const pend = pdCandidates().filter(c => !c.has).length;
+  $("cIO").textContent = String(hi);
+  $("cPD").textContent = pend ? String(pend) : String(Object.keys(DB.elements).length);
+  $("cPD").style.color = pend ? "var(--pd)" : "";
+  const songs = Object.values(DB.projects).reduce((a,p) => a + (p.songs||[]).length, 0);
+  $("cSC").textContent = String(songs);
+}
+function setTab(t){
+  TAB = t;
+  document.body.dataset.tab = t;
+  document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.t === t)));
+  $("pageIO").hidden = t !== "io";
+  $("pagePD").hidden = t !== "pd";
+  $("pageSC").hidden = t !== "sc";
+  if (t === "pd") pdRender();
+  if (t === "sc") scRender();
+  try{ localStorage.setItem("emr:tab", t); }catch(_){}
+}
+function renderAll(){ ioRender(); pdRender(); scRender(); aiTag(); counts(); }
+
+/* ---------------- boot ---------------- */
+(function boot(){
+  DB = loadDB();
+  if (!DB.cfg) DB.cfg = {apiKey:"", model:"", ui:{}};
+  if (!DB.cfg.ui) DB.cfg.ui = {};
+  sheet();
+
+  document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => setTab(b.dataset.t));
+  $("btnSettings").onclick = openSettings;
+
+  /* IO wiring */
+  $("ioAlbum").addEventListener("input", () => { sheet().album = $("ioAlbum").value; persist(); });
+  $("ioArtist").addEventListener("input", () => { sheet().artist = $("ioArtist").value; persist(); });
+  $("ioBig").addEventListener("input", () => { sheet().big = $("ioBig").value; persist(); });
+  $("ioFilter").addEventListener("input", ioRender);
+  $("ioSearch").onclick = ioSearch;
+  ["ioAlbum","ioArtist"].forEach(id => $(id).addEventListener("keydown", e => { if (e.key === "Enter") ioSearch(); }));
+  $("ioBank").addEventListener("dragover", e => { e.preventDefault(); $("ioBank").classList.add("over"); });
+  $("ioBank").addEventListener("dragleave", () => $("ioBank").classList.remove("over"));
+  $("ioBank").addEventListener("drop", e => { e.preventDefault(); $("ioBank").classList.remove("over");
+    const id = e.dataTransfer.getData("text/plain"); if (id) ioAssign(id, null); });
+  $("ioPasteBtn").onclick = () => { const on = $("ioPaste").hidden; $("ioPaste").hidden = !on; $("ioPasteRow").hidden = !on; if (on) $("ioPaste").focus(); };
+  $("ioPasteCancel").onclick = () => { $("ioPaste").hidden = true; $("ioPasteRow").hidden = true; $("ioPaste").value = ""; };
+  $("ioPasteAdd").onclick = () => {
+    const lines = $("ioPaste").value.split(/\r?\n/).filter(l => l.trim());
+    if (!lines.length){ toast("Nothing to add."); return; }
+    const n = ioAddTracks(lines);
+    $("ioPaste").value = ""; $("ioPaste").hidden = true; $("ioPasteRow").hidden = true;
+    ioRender(); persist(); toast(n + " tracks added.");
   };
-  $("wsOpen").onclick = () => {
-    const list = Object.values(load("sheets", {})).sort((a,b) => String(b.at).localeCompare(String(a.at)));
-    if (!list.length){ toast("No saved sheets yet."); return; }
+  $("ioClear").onclick = () => {
+    const s = sheet();
+    if (!s.tracks.length) return;
+    if (!confirm("Clear every track from this sheet? Your notes stay.")) return;
+    s.tracks = []; IO_SEL = null; ioRender(); persist();
+  };
+  $("ioNew").onclick = () => {
+    const s = {id:uid("sh-"), album:"", artist:"", tracks:[], notes:{}, big:"", at:new Date().toISOString()};
+    DB.sheets[s.id] = s; DB.cfg.ui.sheet = s.id; IO_SEL = null;
+    $("ioAlbum").value = ""; $("ioArtist").value = ""; $("ioBig").value = ""; $("ioFilter").value = "";
+    $("ioResults").hidden = true;
+    ioRender(); persist();
+  };
+  $("ioOpen").onclick = () => {
+    const list = Object.values(DB.sheets).sort((a,b) => String(b.at).localeCompare(String(a.at)));
+    if (!list.length){ toast("No sheets yet."); return; }
     const label = list.map((w,i) => `${i+1}. ${w.artist ? w.artist + " – " : ""}${w.album || "Untitled"} (${(w.tracks||[]).length} tracks)`).join("\n");
     const pick = prompt("Open which sheet?\n\n" + label, "1");
     const i = Number(pick) - 1;
     if (!(i >= 0 && i < list.length)) return;
-    WS = list[i]; WS.notes = WS.notes || {}; WS.tracks = WS.tracks || []; WS_SEL = null;
-    $("wsAlbum").value = WS.album || ""; $("wsArtist").value = WS.artist || ""; $("wsFilter").value = "";
-    render(); toast(`Opened “${WS.album || "Untitled"}”.`);
+    DB.cfg.ui.sheet = list[i].id; IO_SEL = null;
+    $("ioFilter").value = ""; $("ioResults").hidden = true;
+    ioRender(); persist();
   };
-
-  $("wsCopy").onclick = () => {
-    const txt = songReviews();
+  $("ioCopy").onclick = () => {
+    const txt = ioSongReviews();
     if (!txt){ toast("Place a few tracks first."); return; }
-    toast(copyRich(txt, xlTable([txt])) ? "Song reviews copied – paste into the Song Reviews cell." : "Copy failed.");
+    toast(copyRich(txt, xlTable([txt])) ? "Song reviews copied." : "Copy failed.");
   };
-  $("wsCopyBig").onclick = () => {
-    const txt = ($("wsBig").value || "").trim();
-    if (!txt){ toast("Nothing written yet."); return; }
-    toast(copyRich(txt, xlTable([txt])) ? "Big picture copied." : "Copy failed.");
+  $("ioToPD").onclick = () => {
+    const pend = pdCandidates().filter(c => !c.has).length;
+    setTab("pd");
+    toast(pend ? `${pend} track${pend===1?"":"s"} waiting in the dissection queue.` : "Nothing new at 8+ — the queue is clear.");
   };
 
+  /* PD wiring */
+  $("pdFilter").addEventListener("input", pdRender);
+  $("pdOnlyOpen").querySelector("input").addEventListener("change", e => {
+    $("pdOnlyOpen").classList.toggle("on", e.target.checked); pdRender();
+  });
+  $("pdAdd").onclick = () => { newElement({}); pdRender(); };
+
+  /* SC wiring */
+  $("scWbFilter").addEventListener("input", scWordBank);
+  $("scNewProject").onclick = () => {
+    const n = prompt("Project name", "Chicago Bounce");
+    if (n === null) return;
+    newProject(n.trim() || "Untitled project"); scRender();
+  };
+  $("scNewSong").onclick = () => {
+    const n = prompt("Song name", "Clean Hands");
+    if (n === null) return;
+    newSong(n.trim() || "Untitled song"); scRender();
+  };
+  $("scBrief").onclick = () => {
+    const txt = scBriefText();
+    if (!txt){ toast("Pick a song first."); return; }
+    modal({title:"Critique brief", wide:true,
+      body:`<p class="hint">What you referenced, what you did with it, and where you're unsure. This is the ask to send
+        Ethan Dietz — far more useful to him than "what do you think".</p><pre class="out">${esc(txt)}</pre>`,
+      footer:`<button class="btn prim" data-copy>Copy brief</button><span class="sp" style="flex:1"></span><button class="btn" data-close>Close</button>`,
+      onOpen:(host)=>{ host.querySelector("[data-copy]").onclick = () => toast(copyRich(txt) ? "Brief copied." : "Copy failed."); }});
+  };
+
+  /* global keys */
   document.addEventListener("keydown", e => {
-    if (!WS_SEL) return;
     const t = e.target;
-    if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA")) return;
-    if (e.key === "Escape"){ WS_SEL = null; render(); return; }
-    if (/^[0-9]$/.test(e.key)){ e.preventDefault(); assign(WS_SEL, e.key === "0" ? 10 : Number(e.key)); }
+    const typing = t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT");
+    if (typing) return;
+    if (TAB === "io" && IO_SEL){
+      if (e.key === "Escape"){ IO_SEL = null; ioRender(); return; }
+      if (/^[0-9]$/.test(e.key)){ e.preventDefault(); ioAssign(IO_SEL, e.key === "0" ? 10 : Number(e.key)); return; }
+    }
+    if (TAB === "sc" && SC_SEL && e.key === "Escape"){ SC_SEL = null; scWordBank(); }
   });
 
-  render();
+  renderAll();
+  let t = "io"; try{ t = localStorage.getItem("emr:tab") || "io"; }catch(_){}
+  setTab(t);
+  persist(true);
 })();
 </script>
-
 </body>
 </html>
