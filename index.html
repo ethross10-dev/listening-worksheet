@@ -2008,11 +2008,31 @@ function ioAdd(names){
 }
 /* ---- MusicBrainz (this build is not sandboxed, so it can reach the API) ---- */
 let MB_LAST = 0;
-async function mbFetch(path){
-  const wait = Math.max(0, 1100 - (Date.now() - MB_LAST));   // their limit is 1 call/sec
-  if (wait) await new Promise(r => setTimeout(r, wait));
+const MB_GAP = 1300;                       // their ceiling is 1 call/sec; sit just under it
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+/* MusicBrainz answers 503 when it wants you to slow down, not only when it is down.
+   Their documented remedy is to back off and retry, so do exactly that. */
+async function mbFetch(path, note, tries){
+  tries = tries || 0;
+  const wait = Math.max(0, MB_GAP - (Date.now() - MB_LAST));
+  if (wait) await sleep(wait);
   MB_LAST = Date.now();
-  const res = await fetch("https://musicbrainz.org/ws/2" + path, {headers:{Accept:"application/json"}});
+  let res;
+  try{
+    res = await fetch("https://musicbrainz.org/ws/2" + path, {headers:{Accept:"application/json"}});
+  }catch(e){
+    if (tries < 2){ if (note) note("Network hiccup — retrying…"); await sleep(1200 * (tries + 1)); return mbFetch(path, note, tries + 1); }
+    throw new Error("couldn't reach MusicBrainz from this browser");
+  }
+  if (res.status === 503 || res.status === 429){
+    if (tries < 3){
+      const back = 1500 * Math.pow(2, tries);
+      if (note) note("MusicBrainz asked us to slow down — retrying in " + Math.round(back / 1000) + "s…");
+      await sleep(back);
+      return mbFetch(path, note, tries + 1);
+    }
+    throw new Error("MusicBrainz is rate-limiting this connection. Give it half a minute and try again.");
+  }
   if (!res.ok) throw new Error("MusicBrainz returned " + res.status);
   return res.json();
 }
@@ -2037,7 +2057,8 @@ async function ioFindReleases(btn){
     const parts = [];
     if (s.artist) parts.push('artist:"' + s.artist.replace(/"/g,"") + '"');
     if (s.album)  parts.push('releasegroup:"' + s.album.replace(/"/g,"") + '"');
-    const data = await mbFetch("/release-group/?query=" + encodeURIComponent(parts.join(" AND ")) + "&fmt=json&limit=20");
+    const note = m => { box.innerHTML = '<div class="rmsg">' + esc(m) + '</div>'; };
+    const data = await mbFetch("/release-group/?query=" + encodeURIComponent(parts.join(" AND ")) + "&fmt=json&limit=20", note);
     const groups = (data["release-groups"] || []).filter(g => g && g.title);
     $("tagMB").textContent = "MusicBrainz · connected"; $("tagMB").className = "tag on";
     if (!groups.length){
@@ -2060,8 +2081,7 @@ async function ioFindReleases(btn){
     });
   }catch(e){
     $("tagMB").textContent = "MusicBrainz · unreachable"; $("tagMB").className = "tag warn";
-    box.innerHTML = '<div class="rmsg">Couldn\'t reach MusicBrainz: ' + esc(e && e.message ? e.message : "unknown") +
-      '. Paste the tracklist into the bank instead.</div>';
+    mbError(box, e, "Paste the tracklist into the bank instead.", () => ioFindReleases($("ioLoad")));
   }finally{ btn.disabled = false; btn.textContent = old; }
 }
 async function ioLoadRelease(g){
@@ -2069,7 +2089,8 @@ async function ioLoadRelease(g){
   box.innerHTML = '<div class="rmsg">Loading the tracklist for “' + esc(g.title) + '’…</div>'.replace("’", "”");
   const s = sheet();
   try{
-    const rl = await mbFetch("/release?release-group=" + encodeURIComponent(g.id) + "&inc=recordings&fmt=json&limit=25");
+    const note = m => { box.innerHTML = '<div class="rmsg">' + esc(m) + '</div>'; };
+    const rl = await mbFetch("/release?release-group=" + encodeURIComponent(g.id) + "&inc=recordings&fmt=json&limit=25", note);
     const releases = rl.releases || [];
     /* One release-group holds many pressings; take the one with the fullest tracklist. */
     let best = null, bestN = -1;
@@ -2092,8 +2113,16 @@ async function ioLoadRelease(g){
     ioRender();
     toast(n + " tracks loaded from MusicBrainz.");
   }catch(e){
-    box.innerHTML = '<div class="rmsg">Couldn\'t load that tracklist: ' + esc(e && e.message ? e.message : "unknown") + '</div>';
+    mbError(box, e, "", () => ioLoadRelease(g));
   }
+}
+function mbError(box, e, tail, retry){
+  const msg = (e && e.message) ? e.message : "unknown error";
+  box.hidden = false;
+  box.innerHTML = '<div class="rmsg"><b>' + esc(msg) + '</b>' + (tail ? " " + esc(tail) : "") +
+    ' <button class="btn" id="mbRetry" style="margin-left:8px">Try again</button></div>';
+  const r = box.querySelector("#mbRetry");
+  if (r) r.onclick = retry;
 }
 function ioAssign(id, score){
   const s = sheet(); const t = s.tracks.find(x => x.id === id);
